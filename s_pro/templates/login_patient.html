@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}Patient Login{% endblock title %}
+{% block head %}
+    <style>
+
+body{
+    {% comment %} background-color: rgb(222, 235, 201); {% endcomment %}
+}
+#form1{
+    height: 450px;
+    width: 400px;
+    background-color:aliceblue;
+    
+  
+   
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 40px;
+}
+
+h4 {
+    text-align: center;
+}
+.container{
+    display: flex;
+    justify-content: center;
+}
+    </style>
+
+    {% endblock head %}
+
+{% block body %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show mx-5" role="alert">
+        <strong>Warning!</strong> {{message}} 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+{% endif %}
+<div class="container">
+    <form id="form1" method="post">
+        {% csrf_token %}
+        <h4>Patient Login:</h4>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" placeholder="Enter Username" id="username" name="username" class="form-control" aria-describedby="emailHelp"
+                    >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input  type="password" placeholder="Password" id="password" name="pass" class="form-control" aria-describedby="emailHelp">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br>
+
+            <br>
+            <a href="form-control patient_signup" >Create a account</a>
+            <br><br>  
+            <a href="password_reset" >Forgot Password?</a>
+    </form>
+</div>
+    <script>
+        const form = document.getElementById('form1');
+            form.addEventListener('submit', function (event) {
+                // form validation code goes here
+                event.preventDefault();
+                const uname = document.getElementById('username');
+                const pass = document.getElementById('password');
+    
+                const unamev = uname.value;
+                const passv = pass.value;
+    
+                if(unamev.charAt(0)!="P"){
+                    alert("Enter Valid Username")
+                    uname.focus()
+                }
+                else if(!(/^[a-zA-Z0-9_]{4,16}$/.test(unamev))){
+                    alert("Enter valid username. \nUsername can only have letters,numbers and underscore.\n Length between 4 and 16 ")
+                    uname.focus()
+                }
+                else{
+                    form.submit(); 
+                }
+    
+            });
+    
+        </script>
+
+{% endblock body %}

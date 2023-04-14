@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %}
+  Hospital Update
+{% endblock %}
+{% block head %}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #e7e7e3;
+    }
+    
+    #regForm {
+      background-color: #fdfeff;
+      margin: 20px auto;
+      font-family: Raleway;
+      padding: 40px;
+      width: 70%;
+      min-width: 300px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    div.form-control {
+      padding: 30px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+    
+    div.form-group {
+      padding: 10px;
+    }
+ 
+  </style>
+{% endblock %}
+
+{% block body %}
+  {% comment %} {% for j in user %}
+    {% endcomment %}
+<div class="container">
+
+    <form id="regForm" method="post">
+      {% csrf_token %}
+      <h1>Hospital Update:</h1>
+      <div class="form-control">
+        <label for="exampleInputEmail1"><h4>Info</h4></label>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" name="name" value="{{ j.name }}" id="name" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" name="uname" value="{{ j.id_no }}" id="uname" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" value="{{ j.email }}" id="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Contact number</label>
+          <input type="text" value="{{ j.contact_no1 }}" id="phno1" name="phno1" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contact number" required />
+        </div>
+      
+        <div class="form-group">
+          <label for="exampleInputEmail1">Contact number (Alternative)</label>
+          <input type="text" value="{{ j.contact_no2 }}" id="phno2" name="phno2" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contact number" />
+          <small>(Optional)</small>
+        </div>
+      
+      </div>
+      <br>
+      <div class="form-control">
+        <label for="exampleInputEmail1">
+            <h4>Blood Available (in Units)</h4>
+        </label>
+
+        <p><input class="form-control" value="{{j.blood_quant.bg_A_pos}}" type="number" id="Ap" name="Ap" placeholder="A+" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_A_neg}}" type="number" id="An" name="An" placeholder="A-" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_B_pos}}" type="number" id="Bp" name="Bp" placeholder="B+" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_B_neg}}" type="number" id="Bn" name="Bn" placeholder="B-" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_AB_pos}}" type="number" id="ABp" name="ABp" placeholder="AB+" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_AB_neg}}" type="number" id="ABn" name="ABn" placeholder="AB-" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_O_pos}}" type="number" id="Op" name="Op" placeholder="O+" required></p>
+        <p><input class="form-control" value="{{j.blood_quant.bg_O_neg}}" type="number" id="On" name="On" placeholder="O-" required></p>
+      
+          <label for="exampleInputEmail1">Last Updated</label>
+          <input type="text" value="{{ j.blood_quant.last_updated }}" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contact number" disabled/>
+         
+
+    </div>
+      <div>
+        <br />
+
+        <div style="float:right;">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+       
+      </div>
+    </form>
+  </div>
+    {% comment %}
+  {% endfor %} {% endcomment %}
+
+  <script>
+    const form = document.getElementById('regForm')
+    form.addEventListener('submit', function (event) {
+      // form validation code goes here
+      event.preventDefault()
+      const e = document.getElementById('email')
+      const ph = document.getElementById('phno1')
+      
+      
+    
+      const ev = e.value.trim()
+      const phv = ph.value.trim()
+ 
+
+    
+      // add more input fields as needed
+    
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ev)) {
+        alert('Enter valid email')
+        ph.focus()
+      } else if (phv.length != 10 || !(/^\d+$/.test(phv))) {
+        alert('Enter valid 10 digit contact number')
+        ph.focus()
+      }  else {
+        form.submit()
+      }
+    })
+  </script>
+{% endblock %}

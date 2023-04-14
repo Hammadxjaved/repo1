@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Admin index{% endblock title %}
+{% block head %}
+
+
+{% endblock head %}
+
+{% block body %}
+    <h1>Admin Home Page</h1>
+    <a href="admin_user_logout" class="btn btn-primary">Logout</a>
+    {{ redirect_to_login_immediately }}
+    {% endblock body %}

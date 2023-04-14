@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block title %}Password OTP{% endblock title %}
+{% block head %}
+<style>
+    body{
+        background-color: rgb(255, 255, 255);
+    }
+    #form1{
+        height: 250px;
+        width: 400px;
+        background-color:aliceblue;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 52%;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+</style>
+
+{% endblock head %}
+
+{% block body %}
+<form id="form1" action="/reset_pwd">
+    {% csrf_token %}
+    <h4>Enter Pin sent to {{user.email}}</h4>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Pin</label>
+            <input type="number" placeholder="Enter Pin" id="otp1" name="otp1" class="form-control" aria-describedby="emailHelp"
+                required>
+            <input type="hidden" value="{{otp}}"  id="otp2" name="otp2" class="form-control" aria-describedby="emailHelp"
+                required>
+        </div>
+       
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <script>
+            const form = document.getElementById('form1');
+                form.addEventListener('submit', function (event) {
+                    // form validation code goes here
+                    event.preventDefault();
+                    const otp1 = document.getElementById('otp1');
+                    const otp2 = document.getElementById('otp2');
+        
+                    const otp1v = otp1.value;
+                    const otp2v = otp2.value;
+        
+                    if(otp1v!=otp2v){
+                        alert("Enter correct otp")
+                        otp1.focus()
+                    }
+                    else{
+                        form.submit(); 
+                    }
+        
+                });
+        
+            </script>
+
+    </form>
+
+
+
+{% endblock body %}

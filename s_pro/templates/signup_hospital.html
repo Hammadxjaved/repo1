@@ -1,0 +1,252 @@
+{% extends 'base.html' %}   
+{% block title %}Hospital Signup{% endblock title %}
+{% block head %}
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: #e7e7e3;
+    }
+    
+    #regForm {
+        background-color: #fdfeff;
+        margin: 20px auto;
+        font-family: Raleway;
+        padding: 40px;
+        width: 70%;
+        min-width: 300px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    }
+    
+    h1 {
+        text-align: center;
+    }
+   
+    div.form-control {
+        padding: 30px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+
+
+    }
+
+    div.form-group {
+        padding: 10px;
+    }
+</style>
+{% endblock head %}
+
+{% block body %}
+
+<body>
+<div class="container">
+
+    <form id="regForm" method="post">
+        {% csrf_token %}
+        <h1>Hospital/Blood Bank Register:</h1>
+        <div class="form-control">
+            <label for="exampleInputEmail1">
+                <h4>Info</h4>
+            </label>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" name="name" id="name" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" id="email" name="email" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Contact number  </label>
+                <input type="text" id="phno1" name="phno1" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter Contact number" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Alternate Contact number (Optional) </label>
+                <input type="text" class="form-control" id="phno2" name="phno2" aria-describedby="emailHelp"
+                    placeholder="Enter Alternate Contact number">
+            </div>
+        </div>
+        <br>
+        <div class="form-control">
+            <label for="exampleInputEmail1">
+                <h4>Location</h4>
+            </label>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Address</label>
+                <input type="text" name="address" id="address" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter Address" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Landmark (if any)</label>
+                <input type="text" name="landmark" id="landmark" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter Landmark" >
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">City</label>
+                <select class="form-control" name="city" id="city" required>
+                    <option value="">---Select City---</option>
+                    <option value="Aligarh">Aligarh</option>
+                    <option value="New Delhi">New Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="pune">Pune</option>
+                    <option value="jaipur">Jaipur</option>
+                    <option value="surat">Surat</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">State</label>
+                <select class="form-control" name="state" id="state" required>
+                    <option value="">---Select state---</option>
+                    <option value="UP">UP</option>
+                    <option value="Delhi">Dehli</option>
+                    <option value="maharashtra">Maharashtra</option>
+                    <option value="karnataka">Karnataka</option>
+                    <option value="telangana">Telangana</option>
+                    <option value="tamilnadu">Tamil Nadu</option>
+                    <option value="westbengal">West Bengal</option>
+                    <option value="maharashtra">Maharashtra</option>
+                    <option value="gujarat">Gujarat</option>
+                    <option value="rajasthan">Rajasthan</option>
+                    <option value="gujarat">Gujarat</option>
+                    
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-control">
+            <label for="exampleInputEmail1">
+                <h4>Blood Available (in Units)</h4>
+            </label>
+
+            <p><input class="form-control" type="number" id="Ap" name="Ap" placeholder="A+" required></p>
+            <p><input class="form-control" type="number" id="An" name="An" placeholder="A-" required></p>
+            <p><input class="form-control" type="number" id="Bp" name="Bp" placeholder="B+" required></p>
+            <p><input class="form-control" type="number" id="Bn" name="Bn" placeholder="B-" required></p>
+            <p><input class="form-control" type="number" id="ABp" name="ABp" placeholder="AB+" required></p>
+            <p><input class="form-control" type="number" id="ABn" name="ABn" placeholder="AB-" required></p>
+            <p><input class="form-control" type="number" id="Op" name="Op" placeholder="O+" required></p>
+            <p><input class="form-control" type="number" id="On" name="On" placeholder="O-" required></p>
+        </div>
+        <br> 
+        <div class="form-control">
+            <label for="exampleInputEmail1">
+                <h4>Login details</h4>
+            </label>
+
+            <div class="form-group">
+                <labnamfor="exampleInputEmail1">Username</label>
+                <input type="text" name="username" id="uname" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter Username" required>
+                    <small id="emailHelp" class="form-text text-muted">Username should start from "H"</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="password" name="password1" id="password1" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter password" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password confirm</label>
+                <input type="password" name="password2" id="password2" class="form-control" aria-describedby="emailHelp"
+                    placeholder="Enter password again" required>
+            </div>
+        </div>
+        <br>
+        <div style="float:right;">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <a href="/hospital_login">i have already account</a>
+        </div>
+        
+        
+        
+    </form>
+</div>
+
+    <script>
+        const form = document.getElementById('regForm');
+        form.addEventListener('submit', function (event) {
+            // form validation code goes here
+
+            
+            event.preventDefault();
+            let arr = [];
+            {% for i in users %}
+            arr.push("{{i.username}}");
+            {% endfor %}
+            const n = document.getElementById('name');
+            const e = document.getElementById('email');
+            const ph1 = document.getElementById('phno1');
+            const ph2 = document.getElementById('phno2');
+            const add = document.getElementById('address');
+            const landmark = document.getElementById('landmark');
+            const uname = document.getElementById('uname');
+            const pass1 = document.getElementById('password1');
+            const pass2 = document.getElementById('password2');
+
+            const nv = n.value.trim()
+            const ev = e.value.trim()
+            const ph1v = ph1.value.trim()
+            const ph2v = ph2.value.trim()
+            const addv = add.value.trim()
+            const landmarkv = landmark.value.trim()
+            const unamev = uname.value
+            const pass1v = pass1.value
+            const pass2v = pass2.value
+            // add more input fields as needed
+            if (!(/^[A-Za-z\s]*$/.test(nv)) || nv == "" || nv.length>40) {
+                alert("Enter valid name")
+            }
+            else if(!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ev)) || ev.length>40){
+                alert("Enter valid email")
+                ph1.focus()
+            }
+            else if(ph1v.length!=10){
+                alert("Enter valid 10 digit contact number")
+                ph1.focus()
+            }
+            else if(addv=="" || addv.length>100){
+                alert("Enter valid Address")
+                add.focus()
+            }
+            else if(unamev.charAt(0)!="H" || unamec.length>40){
+                alert("Enter Usename starting with 'H'")
+                uname.focus()
+            }
+            else if(!(/^[a-zA-Z0-9_]{4,16}$/.test(unamev))){
+                alert("Enter valid username. \nUsername can only have letters,numbers and underscore.\n Length between 4 and 16 ")
+                uname.focus()
+            }
+            else if(arr.includes(unamev)){
+                alert("Username Already exist")
+                uname.focus()
+            }
+            else if(pass1v!=pass2v){
+                alert("Password and confirmed password are different")
+                pass1.focus()
+            }
+            else if(pass1v.length<6){
+                alert("Enter strong password")
+                pass1.focus()
+            }
+            else{
+                form.submit(); 
+            }
+        });
+
+    </script>
+    {% endblock body %}

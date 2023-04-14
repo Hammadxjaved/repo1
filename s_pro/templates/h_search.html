@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Hospital Search{% endblock title %}
+{% block head %}
+
+<style>
+    .box{
+        
+  border-radius: 25px;
+    }
+</style>
+{% endblock head %}
+
+{% block body %}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+
+            {% for j in hospd %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow box">
+                    <img class="card-img-top box"
+                    data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                    alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
+                    src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg"
+                    data-holder-rendered="true"> 
+                    <div class="card-body">
+                      <b> Name: </b>{{j.name}}<br>
+                      <b> Email:</b> {{j.email}} <br>
+                      <b> Address:</b> {{j.location.address}}, {{j.location.landmark}}, {{j.location.city}}, {{j.location.state}} <br>
+                      <b> Contact:</b> {{j.contact_no1}} 
+                        
+                        
+                        <p class="card-text"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form method="post" action="/hospital_page">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="data" value="{{j.id_no}}">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Veiw Details</button>
+                                    </form>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock body %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}
+  Blood Requests
+{% endblock %}
+{% block head %}
+  <style>
+    .box {
+      border-radius: 25px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <h2>Your Responses </h2>
+    <div class="row">
+      {% for i in r2 %}
+      
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow box">
+            <div class="card-body">
+              Patient name : {{ i.req_id.patient_id.name }}<br />
+              hospital name: {{ i.req_id.hospital_name }}<br />
+              Address of Hospital: {{ i.req_id.hospital_add }}<br>
+              date of request: {{ i.req_id.date_of_request }}<br />
+              Queantity required: {{ i.req_id.quantity }}<br />
+              Recieved: {{ i.req_id.recieved }}<br />
+
+             
+
+              <p class="card-text"></p>
+              
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<hr>
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+    <h2>All Blood Requests </h2>
+
+      <div class="row">
+        {% for j in r %}
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow box">
+              <div class="card-body">
+                Patient name : {{ j.patient_id.name }}<br />
+                hospital name: {{ j.hospital_name }}<br />
+                Address of Hospital: {{ j.hospital_add }}
+                date of request: {{ j.date_of_request }}<br />
+                Queantity required: {{ j.quantity }}<br />
+
+               
+
+                <p class="card-text"></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <form method="post" name="form_int">
+                      {% csrf_token %}
+                      <input type="hidden" name="data" value="{{j.id}}" />
+                      <input type="hidden" name="p_id" value="{{j.patient_id.id_no}}" />
+                      <button type="submit" class="btn btn-sm btn-outline-secondary">Interested</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+      <button class="btn btn-primary" style="float: right;" onclick="goBack()">Go Back</button>
+      <script>
+        function goBack() {
+            window.history.back();
+        }
+      </script>
+    </div>
+  </div>
+{% endblock %}

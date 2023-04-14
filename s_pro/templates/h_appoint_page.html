@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}Appointment Page{% endblock title %}
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+
+<section class="vh-200" style=" background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0" style="width: 900px;">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Avatar"
+                class="img-fluid px-5" style="width: 100%; height: 200px; margin-top: 15%;" />
+              <h5>{{hosp.donor_id.name}}</h5>
+              <p></p>
+              
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>date of Request</h6>
+                    <p class="text-muted">{{hosp.date_of_appointment}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Phone</h6>
+                    <p class="text-muted">{{hosp.donor_id.contact_no1}}</p>
+                    <p class="text-muted">{{hosp.contact_no2}}</p>
+                  </div>
+                </div>
+                <h6>Location</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6">
+                    <h6>Address</h6>
+                    <p class="text-muted">{{hosp.donor_id.location.address}}, near {{hosp.donor_id.location.landmark}}</p>
+                  </div>
+                  <div class="">
+                    <h6>City</h6>
+                    <p class="text-muted">{{hosp.donor_id.location.city}}</p>
+                  </div>
+                  <div class="mb-3">
+                    <h6>State</h6>
+                    <p class="text-muted">{{hosp.donor_id.location.state}}</p>
+                  </div>
+                </div>
+               
+                <hr class="mt-0 mb-4">
+                <div class="mb-3">
+                  <h6>Blood Group</h6>
+                  <p class="text-muted">{{hosp.donor_id.blood_group}}</p>
+                </div>
+                <div class="mb-3">
+                  <h6>Last Donated Blood on </h6>
+                  <p class="text-muted">{{hosp.donor_id.health.last_donation_date}}</p>
+                </div>
+                <div class="mb-3">
+                  <h6>Age</h6>
+                  <p class="text-muted">{{hosp.donor_id.age}}</p>
+                </div>
+                <div class="mb-3">
+                  <h6>Contact no</h6>
+                  <p class="text-muted">{{hosp.donor_id.contact_no1}}</p>
+                </div>
+                <div class="mb-3">
+                  <h6>Gender</h6>
+                  <p class="text-muted">{{hosp.donor_id.gender}}</p>
+                </div>
+                
+                {% comment %} <form id="form_appoint" method="post" action="/donor_appoint">
+                  {% csrf_token %}
+                  For Donors :
+                  <input type="hidden" value="{{hosp.name}}" id="hosp" name="hosp" class="form-control disabled"
+                    aria-describedby="emailHelp" required>
+                  <input type="hidden" value="{{hosp.id_no}}" id="hosp1" name="hosp1" class="form-control disabled"
+                    aria-describedby="emailHelp" required>
+                  <button type="submit" class="btn btn-primary">Schedule Appointment</button> {% endcomment %}
+              </div>
+              <div class="col-6 mb-3">
+                <form action="/hospital" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{hosp.donor_id.id_no}}" class="form-control" name="d_id" required><br>
+                    <input type="hidden" value="{{hosp.id}}" name="id_no">
+                    <input type="hidden" value="{{hosp.donor_id.email}}" name="d_email">
+                    <input type="datetime-local" class="form-control" name="date_scheduled" required><br>
+                    <button type="submit" class="btn btn-primary"> Approve </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('form_appoint');
+  form.addEventListener('submit', function (event) {
+    // form validation code goes here
+    event.preventDefault();
+    const hosp = document.getElementById('hosp');
+    const hospv = hosp.value;
+
+    let text = "Do you confirm to ask for appointment to danate blood at "+hospv;
+    if (confirm(text) == true) {
+      form.submit();
+    } else {
+     
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+{% endblock body %}

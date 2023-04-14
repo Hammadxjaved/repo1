@@ -1,0 +1,201 @@
+{% extends 'base.html' %}   
+{% block title %}Homepage{% endblock title %}
+{% block head %}
+
+<style>
+    body{
+        background-color: rgb(255, 241, 241);
+    }
+    #img1{
+        width:100%;
+        opacity:100%;
+        height: auto;
+    }
+    #top{
+        color: aliceblue;
+        position: absolute;
+        top: 20%;
+        left: 15%;
+        width: 30%;
+        text-align: justify;
+        text-justify: inter-word;
+        
+    }
+    p{
+      text-align: justify;
+      text-justify: inter-word; 
+    }
+    #button1{
+        position: relative;
+        right: 40%;
+    }
+    h5,h4{
+        color: rgb(211, 230, 66);
+    }
+</style>
+{% endblock head %}
+
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %} 
+<div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
+  <strong>Success!</strong> {{message}} 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %} 
+<div class="container">
+    <div id="carouselExampleDark" style="height: 50%;" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="5000">
+            <img src="static/bg2.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+             <a href="/donor_signup"><button id="button1"  class="btn btn-danger">Register as a Donor</button></a>   
+              <h4></h4>
+             <h5></h5> 
+
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <img src="static/Blooddonation.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h4></h4>
+             <h5></h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="static/Blooddonation2.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h4></h4>
+             <h5></h5>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    
+    
+    <!-- <div class="item text">
+        <p>
+
+            Blood donation saves lives: Blood donation is an essential medical procedure that can save the lives of people in need. Blood transfusions are used to treat various medical conditions, including cancer, chronic anemia, sickle cell disease, and traumatic injuries.
+            
+            Blood cannot be manufactured: Despite advances in medical technology, blood cannot be manufactured. The only way to obtain blood for transfusions is through donations from volunteer donors.
+            
+            Blood has a limited shelf life: Blood components have a limited shelf life, and regular donations are necessary to ensure an adequate supply. Red blood cells can be stored for up to 42 days, while platelets have a shelf life of only five days.
+            
+            The demand for blood is constant: Blood is needed every day to treat patients in hospitals and medical facilities. The demand for blood is constant, and donations are necessary to meet this demand.
+            
+            Blood donors can make a difference: By donating blood, you can make a difference in the lives of others. One blood donation can save up to three lives.
+            
+            Blood donation is safe: Blood donation is a safe and straightforward process. Donors undergo a thorough screening process to ensure that their blood is safe for transfusion.
+            
+            Blood donation is a civic duty: Blood donation is a civic duty that can help improve the health of your community. By donating blood, you are helping to ensure that your friends, family, and neighbors have access to life-saving medical treatment.
+            
+            Donating blood can benefit your health: Studies have shown that blood donation can have health benefits for donors, including reducing the risk of heart disease, improving blood flow, and reducing the risk of certain types of cancer.
+            
+            Donating blood is a selfless act: Donating blood is a selfless act that can have a positive impact on the lives of others. It is an opportunity to give back to your community and help those in need.</p>
+    </div> -->
+    <main role="main">
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+          <div class="container">
+            <h1></h1>
+            <p></p>
+            <p></p>
+          </div>
+        </div>
+  
+          <hr>
+  
+  
+  
+        <div class="container marketing">
+  
+          <!-- Three columns of text below the carousel -->
+          <div class="row">
+            <div class="col-lg-4">
+              <img class="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Generic placeholder image" width="140" height="140">
+              <h2>Register as Donor</h2>
+              <p> Donating blood can save lives. By registering as a donor, you can make a difference in someone's life by providing them with a vital resource that can help them recover from illness, injury, or surgery. Registering as a donor on your website is easy and takes only a few minutes.</p>
+              <p><a class="btn btn-secondary" href="/donor_signup" role="button">View details »</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+              <img class="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Generic placeholder image" width="140" height="140">
+              <h2>Register as Patient</h2>
+              <p> Registering as a patient can help visitors become more informed about blood donation and connect with other blood donors and recipients. Also, visitors can access important information about blood donation, including eligibility requirements, donation procedures, and donation center locations</p>
+              <p><a class="btn btn-secondary" href="/patient_signup" role="button">View details »</a></p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+              <img class="rounded-circle" src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg"  width="140" height="140">
+              <h2>Register as Hospital or Blood Bank</h2>
+              <p>This Website can provide a user-friendly platform for hospitals and blood banks to manage their blood inventory and donation requests. They can easily track and manage blood donations, schedule appointments, and keep track of their inventory levels.</p>
+              <p><a class="btn btn-secondary" href="hospital_signup" role="button">View details »</a></p>
+            </div><!-- /.col-lg-4 -->
+          </div><!-- /.row -->
+  
+  
+          <!-- START THE FEATURETTES -->
+  
+          <hr class="featurette-divider">
+  
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">About Blood Donation.</h2>
+              <p class="lead">Donating blood is important because it can help save lives. Blood is a vital resource for patients who need it due to accidents, surgeries, cancer treatment, and other medical conditions.<br> By donating blood, you can contribute to the community and help ensure that there is enough blood available to those who need it. To learn more about Blood donation process and requirements Click th button below</p>
+              <a class="btn btn-primary" href="/about" role="button">Learn more »</a>
+            </div>
+            <div class="col-md-5">
+              <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 400px; height: 400px; float: right;" src="static/download.png" data-holder-rendered="true">
+            </div>
+          </div>
+  
+          <hr class="featurette-divider">
+  
+          <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+              <h2 class="featurette-heading">World Blood Donor Day</h2>
+              <p class="lead">World Blood Donor Day is an international day observed on June 14th every year to raise awareness about the need for safe blood and to thank voluntary, unpaid blood donors for their life-saving gifts of blood.
+
+                <br>Primary objective is to encourage more people to donate blood regularly and to highlight the importance of voluntary blood donation in saving lives. The day is celebrated in more than 170 countries worldwide, and it is organized by the World Health Organization (WHO) in collaboration with national health authorities, blood transfusion services, and other organizations.
+                <br>Some of the events and activities that are typically organized on World Blood Donor Day include blood donation drives, educational and awareness-raising campaigns, award ceremonies to recognize outstanding blood donors and advocates, and media events to promote the importance of blood donation.
+              </p>
+            </div>
+            <div class="col-md-5 order-md-1">
+              <img class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 450px; height: 450px;" src="static/bloodday.jpg" data-holder-rendered="true">
+            </div>
+          </div>
+  
+          <hr class="featurette-divider">
+  
+          <!-- /END THE FEATURETTES -->
+  
+        </div><!-- /.container -->
+  
+        
+        <footer class="container">
+         <a href="#" style="float: right; font-size: xxx-large;">&#8593;</a>
+         
+        </footer>
+        <br>
+        
+      </main>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Password reset{% endblock title %}
+{% block head %}
+<style>
+    body{
+        background-color: rgb(255, 255, 255);
+    }
+    #form1{
+        height: 350px;
+        width: 400px;
+        background-color:aliceblue;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 52%;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+</style>
+
+{% endblock head %}
+
+{% block body %}
+<form id="form1" method="post" action="/reset_pwd">
+    {% csrf_token %}
+    <h4>Enter new Password</h4>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="text" placeholder="Enter password" id="pass1" name="pass1" class="form-control" aria-describedby="emailHelp"
+                required>
+                <br>
+            <label for="exampleInputEmail1"> Confirm Password</label>
+            <input type="text" placeholder="Enter password again" id="pass2" name="pass2" class="form-control" aria-describedby="emailHelp"
+                required>
+            
+        </div>
+       
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <script>
+            const form = document.getElementById('form1');
+                form.addEventListener('submit', function (event) {
+                    // form validation code goes here
+                    event.preventDefault();
+                    const pass1 = document.getElementById('pass1');
+                    const pass2 = document.getElementById('pass2');
+        
+                    const pass1v = pass1.value;
+                    const pass2v = pass2.value;
+        
+                    if(pass1v!=pass2v){
+                        alert("Enter same password in both fields")
+                        pass1.focus()
+                    }
+                    else if(pass1v.length<8){
+                        alert("Enter strong password")
+                        pass1.focus()
+                    }
+                    else{
+                        form.submit(); 
+                    }
+        
+                });
+        
+            </script>
+
+    </form>
+
+
+
+{% endblock body %}

@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+{% block title %}
+  Donor Update
+{% endblock %}
+{% block head %}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: #e7e7e3;
+    }
+    
+    #regForm {
+      background-color: #fdfeff;
+      margin: 20px auto;
+      font-family: Raleway;
+      padding: 40px;
+      width: 70%;
+      min-width: 300px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    div.form-control {
+      padding: 30px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+    
+    div.form-group {
+      padding: 10px;
+    }
+    
+    #pregnent {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  {% comment %} {% for j in user %}
+    {% endcomment %}
+    <div class="container">
+    <a class="btn dropdown-toggle " style="float: right;" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"></path>
+    </svg>
+                  </button>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/donor_appointments">Appointments</a></li>
+                  <li><a class="dropdown-item" href="/donor_show_req">Blood requests</a></li>
+                  <li><a class="dropdown-item" href="/donor_update">Update Profile</a></li>
+                  <li><a class="dropdown-item" href="donor_logout" >Logout</a></li>
+            {{ redirect_to_login_immediately }}
+
+                   
+                </ul>
+    <form id="regForm" method="post">
+      {% csrf_token %}
+      <h1>Donor Update:</h1>
+      <div class="form-control">
+        <label for="exampleInputEmail1"><h4>Info</h4></label>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" name="name" value="{{ j.name }}" id="name" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" name="uname" value="{{ j.id_no }}" id="uname" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" value="{{ j.email }}" id="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Contact number</label>
+          <input type="text" value="{{ j.contact_no1 }}" id="phno" name="phno" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contact number" required />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Gender </label>
+          <input type="text" value="{{j.gender}}" id="dob" name="dob" class="form-control" aria-describedby="emailHelp"
+              placeholder="Enter Date of birth" disabled>
+      </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Date of Birth </label>
+          <input type="text" value="{{j.dob}}" id="dob" name="dob" class="form-control" aria-describedby="emailHelp"
+              placeholder="Enter Date of birth" disabled>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Blood Group</label>
+        <select class="form-select" name="bg" id="bg" disabled>
+            <option value="{{j.blood_group}}">{{j.blood_group}}</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+        </select>
+    </div>
+      </div>
+      <br />
+      <div class="form-control">
+        <label for="exampleInputEmail1"><h4>Location</h4></label>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Address</label>
+          <input type="text" name="address" id="address" value="{{ j.location.address }}" class="form-control" aria-describedby="emailHelp" placeholder="Enter Address" required />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Landmark (if any)</label>
+          <input type="text" value="{{ j.location.landmark }}" name="landmark" id="landmark" class="form-control" aria-describedby="emailHelp" placeholder="Enter Landmark " />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">City</label>
+          <select class="form-control" name="city" id="city" required>
+            <option value="{{j.location.city}}">{{j.location.city}}</option>
+            <option value="Aligarh">Aligarh</option>
+            <option value="New Delhi">New Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="pune">Pune</option>
+            <option value="jaipur">Jaipur</option>
+            <option value="surat">Surat</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">State</label>
+          <select class="form-control" name="state" id="state" required>
+            <option value="{{j.location.state}}">{{j.location.state}}</option>
+            <option value="UP">UP</option>
+            <option value="Delhi">Dehli</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="telangana">Telangana</option>
+            <option value="tamilnadu">Tamil Nadu</option>
+            <option value="westbengal">West Bengal</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="gujarat">Gujarat</option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <div class="form-control">
+        <label for="exampleInputEmail1"><h4>Health Details</h4></label>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Weight (in kilograms)</label>
+          <input type="number" name="weight" value="{{ j.health.weight }}" id="weight" class="form-control" aria-describedby="emailHelp" placeholder="Enter Weight" required />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">hemoglobin level (in g/dl)</label>
+          <input type="number" value="{{ j.health.hemoglobin_level }}" name="hemo" id="hemo" class="form-control" placeholder="Enter hemoglobin level" step="0.01" />
+          <small id="emailHelp" class="form-text text-muted">if known</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Last Blood Donation date</label>
+          <input type="text" value="Old value: {{j.health.last_donation_date}}" id="lastdonationold" name="lastdonationold" class="form-control" aria-describedby="emailHelp" disabled />
+          <input type="date" id="lastdonation" name="lastdonation" class="form-control" aria-describedby="emailHelp" required />
+        </div>
+        <div class="form-group">
+          Any Piercing, Tattoo or surgery in last 6 months<div class="form-check form-check-inline" style="float:right;">
+            <input class="form-check-input" type="radio" name="piercing" id="piercing1" value="Yes" required />
+            <label class="form-check-label" for="piercing1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline" style="float:right;">
+            <input class="form-check-input" type="radio" name="piercing" id="piercing2" value="No" required />
+            <label class="form-check-label" for="piercing2">No</label>
+          </div>
+        </div>
+        <div class="form-group">
+          Diabetic and takes insulin<div class="form-check form-check-inline" style="float:right;">
+            <input class="form-check-input" type="radio" name="diabetic" id="diabetic1" value="Yes" required />
+            <label class="form-check-label" for="diabetic1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline" style="float:right;">
+            <input class="form-check-input" type="radio" name="diabetic" id="diabetic2" value="No" required />
+            <label class="form-check-label" for="diabetic2">No</label>
+          </div>
+        </div>
+        <div class="form-group">
+          Disease<br />
+
+          <div class="form-check form-check-inline" style="float:right;">
+            <input class="form-check-input" type="radio" name="disease" id="disease1" value="Yes" required />
+            <label class="form-check-label" for="disease1">Yes</label>
+          </div>
+          <div class="form-check form-check-inline" style="float:right;">
+            <input class="form-check-input" type="radio" name="disease" id="disease2" value="No" required />
+            <label class="form-check-label" for="disease2">No</label>
+          </div>
+          <small id="emailHelp" class="form-text text-muted">Any Infectious diseases, such as HIV, hepatitis B or C, syphilis, malaria,<br /> heart disease, cancer or any type of blood related infection</small>
+        </div>
+        {% if g %}
+          <div class="form-group female-fields" id="female-fields">
+            Pregnent or child birth in last 1 year<div class="form-check form-check-inline" style="float:right;">
+              <input class="form-check-input" type="radio" name="preg" id="preg1" value="Yes" />
+              <label class="form-check-label" for="preg">Yes</label>
+            </div>
+
+            <div class="form-check form-check-inline" style="float:right;">
+              <input class="form-check-input" type="radio" name="preg" id="preg2" value="No" />
+              <label class="form-check-label" for="preg">No</label>
+            </div>
+            {% endif %}
+          </div>
+          <br>
+          <div style="float:right;">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
+      <div>
+        <br />
+
+       
+      </div>
+    </form>
+  </div>
+    {% comment %}
+  {% endfor %} {% endcomment %}
+
+  <script>
+    const form = document.getElementById('regForm')
+    form.addEventListener('submit', function (event) {
+      // form validation code goes here
+      event.preventDefault()
+      const e = document.getElementById('email')
+      const ph = document.getElementById('phno')
+      const add = document.getElementById('address')
+      const landmark = document.getElementById('landmark')
+      const w = document.getElementById('weight')
+      const h = document.getElementById('hemo')
+    
+      const ev = e.value.trim()
+      const phv = ph.value.trim()
+      const addv = add.value.trim()
+      const landmarkv = landmark.value.trim()
+      const wv = w.value.trim()
+      const hv = h.value.trim()
+    
+      // add more input fields as needed
+    
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ev)) {
+        alert('Enter valid email')
+        ph.focus()
+      } else if (phv.length != 10) {
+        alert('Enter valid 10 digit contact number')
+        ph.focus()
+      } else if (addv == '') {
+        alert('Enter valid Address')
+        add.focus()
+      } else if (wv < 20 || wv > 300) {
+        alert('Enetr valid weight')
+        add.focus()
+      } else if (hv < 7 || hv > 20) {
+        alert('Enter valid hemoglobin level')
+        add.focus()
+      } else {
+        form.submit()
+      }
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Blood Requests{% endblock title %}
+{% block head %}
+
+<style>
+    .box{
+        
+  border-radius: 25px;
+    }
+</style>
+{% endblock head %}
+
+{% block body %} 
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+
+            {% for j in r %}
+            <div class="col-md-4" >
+                <div class="card mb-4 box-shadow box">
+                    
+                    <div class="card-body">
+                       Patient name : {{j.patient_id.name}}<br>
+                       Patient name : {{j.patient_id.id_no}}<br>
+                        hospital name: {{j.hospital_name}}<br>
+                        Address of Hospital: {{j.hospital_add}}
+                        date of request: {{j.date_of_request}}<br>
+                        Queantity required: {{j.quantity}}<br>
+                        
+                        
+                        {% if j.recieved %}
+                        Name of donor: {{j.donor_id}}
+                        date of respose{{j.date_of_response}}<br>
+                        {% endif %}
+                        <p class="card-text"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <form method="post" action="#">
+                                        {% csrf_token %}
+                                        <select class="form-control" name="d_id" id="d_id" required>
+                                            <option value="">Select Donor who donated</option>
+                                            {% for i in r2 %}
+                                            <option value="{{i.donor_id.id_no}}">{{i.donor_id.name}}</option>
+                                            {% endfor %}
+                                            <option value="none">Some Other</option>
+                                            
+                                        </select>
+                                        <input type="hidden" name="data" value="{{j.id}}">
+                                        <br>
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Blood revcieved</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="btn btn-primary" style="float: right;" onclick="goBack()">Go Back</button>
+      <script>
+        function goBack() {
+            window.history.back();
+        }
+      </script>
+        </div>
+    </div>
+    {% endblock body %}

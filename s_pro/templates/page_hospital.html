@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block title %}Hospital page{% endblock title %}
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+
+<section class="vh-200" style=" background-color: #f4f5f7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-6 mb-4 mb-lg-0" style="width: 900px;">
+        <div class="card mb-3" style="border-radius: .5rem;">
+          <div class="row g-0">
+            <div class="col-md-4 gradient-custom text-center"
+              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+              <img src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg" alt="Avatar"
+                class="img-fluid px-5" style="width: 100%; height: 200px; margin-top: 15%;" />
+              <h5>{{hosp.name}}</h5>
+              <p></p>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h6>Information</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6 mb-3">
+                    <h6>Email</h6>
+                    <p class="text-muted">{{hosp.email}}</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h6>Phone</h6>
+                    <p class="text-muted">{{hosp.contact_no1}}</p>
+                    <p class="text-muted">{{hosp.contact_no2}}</p>
+                  </div>
+                </div>
+                <h6>Location</h6>
+                <hr class="mt-0 mb-4">
+                <div class="row pt-1">
+                  <div class="col-6">
+                    <h6>Address</h6>
+                    <p class="text-muted">{{hosp.location.address}}, near {{hosp.location.landmark}}</p>
+                  </div>
+                  <div class="">
+                    <h6>City</h6>
+                    <p class="text-muted">{{hosp.location.city}}</p>
+                  </div>
+                  <div class="mb-3">
+                    <h6>State</h6>
+                    <p class="text-muted">{{hosp.location.state}}</p>
+                  </div>
+                </div>
+                <h6>Blood Available</h6>
+                <hr class="mt-0 mb-4">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Blood Group</th>
+                      <th scope="col">Quantity (in units)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">A+</th>
+                      <td>{{hosp.blood_quant.bg_A_pos}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">A-</th>
+                      <td>{{hosp.blood_quant.bg_A_neg}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">B+</th>
+                      <td>{{hosp.blood_quant.bg_B_pos}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">B-</th>
+                      <td>{{hosp.blood_quant.bg_B_neg}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">AB+</th>
+                      <td>{{hosp.blood_quant.bg_AB_pos}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">AB-</th>
+                      <td>{{hosp.blood_quant.bg_AB_neg}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">O+</th>
+                      <td>{{hosp.blood_quant.bg_O_pos}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">O-</th>
+                      <td>{{hosp.blood_quant.bg_O_neg}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Last Updated</th>
+                      <td>{{hosp.blood_quant.last_updated}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                {% block form1 %}{% endblock form1 %}
+                {% comment %} <form id="form_appoint" method="post" action="/donor_appoint">
+                  {% csrf_token %}
+                  For Donors :
+                  <input type="hidden" value="{{hosp.name}}" id="hosp" name="hosp" class="form-control disabled"
+                    aria-describedby="emailHelp" required>
+                  <input type="hidden" value="{{hosp.id_no}}" id="hosp1" name="hosp1" class="form-control disabled"
+                    aria-describedby="emailHelp" required>
+                  <button type="submit" class="btn btn-primary">Schedule Appointment</button> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="float: right;" onclick="goBack()">Go Back</button>
+  <script>
+    function goBack() {
+        window.history.back();
+    }
+  </script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('form_appoint');
+  form.addEventListener('submit', function (event) {
+    // form validation code goes here
+    event.preventDefault();
+    const hosp = document.getElementById('hosp');
+    const hospv = hosp.value;
+
+    let text = "Do you confirm to ask for appointment to danate blood at "+hospv;
+    if (confirm(text) == true) {
+      form.submit();
+    } else {
+     
+    }
+
+  });
+
+</script>
+
+
+
+
+
+
+{% endblock body %}

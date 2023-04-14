@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Admin Login{% endblock title %}
+{% block head %}
+    <style>
+
+body{
+    {% comment %} background-color: rgb(222, 235, 201); {% endcomment %}
+}
+#form1{
+    height: 450px;
+    width: 400px;
+    background-color:aliceblue;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 52%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 40px;
+}
+
+h4 {
+    text-align: center;
+}
+    </style>
+
+    {% endblock head %}
+
+{% block body %}
+    <form id="form1" method="post">
+        {% csrf_token %}
+        <h4>Admin Login:</h4>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" placeholder="Enter Username" id="username" name="username" class="form-control" aria-describedby="emailHelp"
+                    >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input  type="password" placeholder="Password" id="password" name="pass" class="form-control" aria-describedby="emailHelp">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br>
+
+            <br>
+    </form>
+
+
+{% endblock body %}

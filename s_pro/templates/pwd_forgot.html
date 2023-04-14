@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Forgot Password{% endblock title %}
+{% block head %}
+<style>
+    body{
+        background-color: rgb(255, 255, 255);
+    }
+    #form1{
+        height: 250px;
+        width: 400px;
+        background-color:aliceblue;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        top: 52%;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 40px rgba(8,7,16,0.6);
+        padding: 50px 35px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+</style>
+
+{% endblock head %}
+
+{% block body %}
+<form id="form1" method="post" >
+    {% csrf_token %}
+    <h4>Forgot Password</h4>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" placeholder="Enter Username" id="username" name="username" class="form-control" aria-describedby="emailHelp"
+                required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+    </form>
+
+    <script>
+        const form = document.getElementById('form1');
+        form.addEventListener('submit', function (event) {
+            // form validation code goes here
+            event.preventDefault();
+            let arr = [];
+            {% for i in users %}
+            arr.push("{{i.username}}");
+            {% endfor %}
+            const uname = document.getElementById('username');
+            const unamev = uname.value
+
+            if(!arr.includes(unamev)){
+                alert("User Does not exist")
+                uname.focus()
+            }
+            else{
+                form.submit(); 
+            }
+        });
+
+
+
+    </script>
+
+
+
+{% endblock body %}
