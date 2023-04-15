@@ -36,6 +36,10 @@ def d_index(request):
 
 #Login page
 def d_login(request):
+    if 'uname' in request.session:
+        a=request.session['uname']
+        if a[0]=='D':
+            return redirect('/donor')  
     if request.method=='POST':
         username=request.POST.get('username')
         pass1=request.POST.get('pass')

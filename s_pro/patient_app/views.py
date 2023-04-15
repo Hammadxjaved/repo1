@@ -31,6 +31,11 @@ def p_index(request):
     return render(request,'index_patient.html',{"hospd":hosp_detail})
 
 def p_login(request):
+    if 'uname' in request.session:
+        a=request.session['uname']
+        if a[0]=='P':
+            return redirect('/patient')  
+
     if request.method=='POST':
         username=request.POST.get('username')
         pass1=request.POST.get('pass')

@@ -68,6 +68,10 @@ def h_page(request):
 
 
 def h_login(request):
+    if 'uname' in request.session:
+        a=request.session['uname']
+        if a[0]=='H':
+            return redirect('/hospital')  
     if request.method == 'POST':
         username = request.POST.get('username')
         pass1 = request.POST.get('pass')
