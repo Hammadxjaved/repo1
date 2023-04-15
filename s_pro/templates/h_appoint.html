@@ -7,45 +7,43 @@
 
 
 
-<div class="album py-5 bg-light">
+<div class="album">
     <div class="container">
-        <div class="row">
-            {% for j in app %}
+        <h1>All Appointment</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Appoint. ID</th>
+                <th>Date of Request</th>
+                <th>Donor </th>
+                <th>Blood Group</th>
+                <th>Weight</th>
+                
+                <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for appointment in app %}
+            <tr>
+                <td>{{appointment.id}}</td>
+                <td>{{ appointment.date_of_appointment|date:"F d, Y" }}</td>
+                <td>{{ appointment.donor_id.name }}</td>
+                <td>{{ appointment.donor_id.blood_group }}</td>
+                <td>{{appointment.donor_id.health.weight}}</td>
+               
+                <td><form method="post"  >
+                    {% csrf_token %}
+                    <input type="hidden" value="{{appointment.id}}" name="id_no">
+                    <input type="hidden" value="{{appointment.donor_id.id_no}}" name="d_id">
+                    <button class="btn btn-primary" type="submit"> Open </button>
+                </form></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                    data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                    alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-                    src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg"
-                    data-holder-rendered="true"> 
-                    <div class="card-body">
-                       <b> Appointment id:</b> {{j.id}} <br>
-                       <b> Name of Donor: </b> {{j.donor_id.name}}<br>
-                       <b>Blood Group:</b> {{j.donor_id.blood_group}} <br>
-                       <b>Weight:</b> {{j.donor_id.health.weight}} kg<br>
-                       
-                       
-                       <b> Date of Request: </b> {{j.date_of_appointment}}<br>
-                       
-                        
-                        
-                        
-                        
-                        <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <form method="post"  >
-                                    {% csrf_token %}
-                                    <input type="hidden" value="{{j.id}}" name="id_no">
-                                    <input type="hidden" value="{{j.donor_id.id_no}}" name="d_id">
-                                    <button class="btn btn-primary" type="submit"> Open </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+        
+        <a class="btn btn-primary" style="float: right;" href="/hospital">Go Home</a>
         </div>
     </div>
     {% endblock body %}

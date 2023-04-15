@@ -66,7 +66,7 @@ def h_page(request):
         return render(request, 'page_hospital.html', {"hosp": hosp})
     return render(request, 'page_hospital.html')
 
-
+ 
 def h_login(request):
     if 'uname' in request.session:
         a=request.session['uname']

@@ -3,7 +3,7 @@
   Blood Requests
 {% endblock %}
 {% block head %}
-  <style>
+  <style> 
     .box {
       border-radius: 25px;
     }
@@ -12,71 +12,86 @@
 
 {% block body %}
 
-<div class="album py-5 bg-light">
+<div class="album">
   <div class="container">
-    <h2>Your Responses </h2>
-    <div class="row">
-      {% for i in r2 %}
-      
-        <div class="col-md-4">
-          <div class="card mb-4 box-shadow box">
-            <div class="card-body">
-              Patient name : {{ i.req_id.patient_id.name }}<br />
-              hospital name: {{ i.req_id.hospital_name }}<br />
-              Address of Hospital: {{ i.req_id.hospital_add }}<br>
-              date of request: {{ i.req_id.date_of_request }}<br />
-              Queantity required: {{ i.req_id.quantity }}<br />
-              Recieved: {{ i.req_id.recieved }}<br />
-
-             
-
-              <p class="card-text"></p>
-              
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-<hr>
-
-
-  <div class="album py-5 bg-light">
-    <div class="container">
-    <h2>All Blood Requests </h2>
 
       <div class="row">
-        {% for j in r %}
-          <div class="col-md-4">
-            <div class="card mb-4 box-shadow box">
-              <div class="card-body">
-                Patient name : {{ j.patient_id.name }}<br />
-                hospital name: {{ j.hospital_name }}<br />
-                Address of Hospital: {{ j.hospital_add }}
-                date of request: {{ j.date_of_request }}<br />
-                Queantity required: {{ j.quantity }}<br />
-
-               
-
-                <p class="card-text"></p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <form method="post" name="form_int">
-                      {% csrf_token %}
-                      <input type="hidden" name="data" value="{{j.id}}" />
-                      <input type="hidden" name="p_id" value="{{j.patient_id.id_no}}" />
-                      <button type="submit" class="btn btn-sm btn-outline-secondary">Interested</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-md-12">
+              <h1>Your Responses</h1>
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Date of Request</th>
+                          <th>Patient Name</th>
+                          <th>Hospital Name</th>
+                          <th>Hospital Address</th>
+                          <th>Quantity</th>
+                          <th>Recieved</th>
+                          
+                          
+                          
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for request in r2 %}
+                          <tr>
+                              <td>{{ request.req_id.date_of_request }}</td>
+                              <td>{{ request.req_id.patient_id.name }}</td>
+                              <td>{{ request.req_id.hospital_name }}</td>
+                              <td>{{ request.req_id.hospital_add }}</td>
+                              <td>{{ request.req_id.quantity }}</td>
+                              <td>{% if request.req_id.recieved %}Yes{% else %}No{% endif %}</td>
+                             
+                             
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
           </div>
-        {% endfor %}
-
       </div>
-      <button class="btn btn-primary" style="float: right;" onclick="goBack()">Go Back</button>
+      <div class="row">
+        <div class="col-md-12">
+            <h1>All Requests</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date of Request</th>
+                        <th>Patient Name</th>
+                        <th>Hospital Name</th>
+                        <th>Hospital Address</th>
+                        <th>Quantity</th>
+                        <th>Respond</th>
+                        
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in r %}
+                        <tr>
+                            <td>{{ request.date_of_request }}</td>
+                            <td>{{ request.patient_id.name }}</td>
+                            <td>{{ request.hospital_name }}</td>
+                            <td>{{ request.hospital_add }}</td>
+                            <td>{{ request.quantity }}</td>
+                            <td><form method="post" name="form_int">
+                              {% csrf_token %}
+                              <input type="hidden" name="data" value="{{request.id}}" />
+                              <input type="hidden" name="p_id" value="{{request.patient_id.id_no}}" />
+                              <button type="submit" class="btn btn-sm btn-outline-secondary">Interested</button>
+                            </form></td>
+                           
+                           
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <a class="btn btn-primary" style="float: right;" href="/donor">Go Home</a>
+
+  </div>
       <script>
         function goBack() {
             window.history.back();

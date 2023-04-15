@@ -192,7 +192,7 @@ def d_appoint(request):
 def d_show_req(request): 
     if request.method=='POST':
         d_id = request.session['uname']
-        data=request.POST.get('data')
+        data=request.POST.get('data') 
         if not blood_request_response.objects.filter(donor_id = d_id,req_id = blood_request.objects.get(id=data)).exists():
             p_id=request.POST.get('p_id')
             q = blood_request_response(patient_id = patient_details.objects.get(id_no = p_id),donor_id = donor_details.objects.get(id_no = d_id),req_id = blood_request.objects.get(id=data))
@@ -292,8 +292,8 @@ def d_h_page(request):
         id=request.POST.get('data')
         request.session['hosp'] = id
         hosp = hospital_details.objects.get(id_no=id)
-        return render(request,'d_page_hospital.html',{"hosp":hosp})
-    return render(request,'d_page_hospital.html')
+        return render(request,'page_hospital.html',{"hosp":hosp})
+    return render(request,'page_hospital.html')
 
 
 

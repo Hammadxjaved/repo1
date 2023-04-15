@@ -1,136 +1,157 @@
 {% extends 'base.html' %}
-{% block title %}Donor index{% endblock title %}
+{% block title %}
+  Donor index
+{% endblock %}
 {% block head %}
-<style>
-  .box{ 
-border-radius: 25px;
-  }
-</style>
-{% endblock head %}
+  <style>
+    .box {
+      border-radius: 25px;
+    }
+  </style>
+{% endblock %}
 
 {% block body %}
-
-
-<div class="album bg-light">
-  {% if messages %}
-  {% for message in messages %} 
-  <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
-    <strong>Success!</strong> {{message}} 
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endfor %}
-  {% endif %} 
-    <div class="container">
-        <a class="btn dropdown-toggle " style="float: right;" href="#" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"></path>
-    </svg>
-                
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/donor_appointments">Appointments</a></li>
-                  <li><a class="dropdown-item" href="/donor_show_req">Blood requests</a></li>
-                  <li><a class="dropdown-item" href="/donor_update">Update Profile</a></li>
-                  <li><a class="dropdown-item" href="donor_logout" >Logout</a></li>
-            {{ redirect_to_login_immediately }}
-
-                   
-                </ul>
-        <h1>Welcome,</h1>
-        <p>In India, the eligibility criteria for blood donation are set by the National Blood Transfusion Council (NBTC) and the
-        Central Drugs Standard Control Organization (CDSCO). Some of the specific criteria for donor eligibility in India
-        include:
-    </p>
-
-    
-    <table class="table table-borderless">
-            <thead>
-              <tr>
-                <td scope="col">Age:</td>
-                <td scope="col">Donors must be between the ages of 18 and 65 years old.</td>
-  
-            </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row">Weight:</td>
-                <td>Donors must weigh at least 50 kilograms or 110 pounds.</td>
-         
-              </tr>
-              <tr>
-                <td scope="row">Hemoglobin levels:</td>
-                <td>Donors must have a minimum hemoglobin level of 12.5 grams per deciliter.</td>
-    
-              </tr>
-              <tr>
-                <td scope="row">Health conditions:</td>
-                <td colspan="2"> Donors must be in good health and free from any infectious diseases, such as HIV, hepatitis B or C, syphilis, or malaria.</td>
-              </tr>
-              <tr>
-                <td scope="row">Medications:</td>
-                <td colspan="2"> Donors who are taking certain medications, such as blood thinners, may be ineligible to donate blood.</td>
-              </tr>
-              <tr>
-                <td scope="row"> Pregnancy:</td>
-                <td colspan="2"> Pregnant women are not eligible to donate blood, and there may be a waiting period after giving birth before
-                    they can donate.</td>
-              </tr>
-              <tr>
-                <td scope="row"> Recent surgeries or illnesses:</td>
-                <td colspan="2"> Donors who have had surgery or a serious illness in the past few months may be ineligible
-                    to donate blood.</td>
-              </tr>
-              <tr>
-                <td scope="row">Travel history: </td>
-                <td colspan="2"> 
-                    Donors who have traveled to certain countries or regions may be ineligible to donate blood due to the
-                    risk of infectious diseases.</td>
-              </tr>
-              <tr>
-                <td scope="row">Health conditions:</td>
-                <td colspan="2"> Donors must be in good health and free from any infectious diseases, such as HIV, hepatitis B or C, syphilis, or malaria.</td>
-            </tr>
-        </tbody>
-    </table> 
-    It's important to note that these eligibility criteria may vary depending on the specific blood donation organization or
-    blood bank. It's always a good idea to check with your local blood donation center for the most up-to-date information
-    on donor eligibility.
-    <br><br>
-    <hr>
-        <div class="row">
-
-            {% for j in hospd %}
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow box">
-                    <img class="card-img-top box"
-                    data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                    alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-                    src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg"
-                    data-holder-rendered="true"> 
-                    <div class="card-body">
-                      <b> Name: </b>{{j.name}}<br>
-                      <b> Email:</b> {{j.email}} <br>
-                      <b> Address:</b> {{j.location.address}}, {{j.location.landmark}}, {{j.location.city}}, {{j.location.state}} <br>
-                      <b> Contact:</b> {{j.contact_no1}} 
-                        
-                        
-                        <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <form method="post" action="/donor_h_page">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="data" value="{{j.id_no}}">
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Veiw Details</button>
-                                    </form>
-                                    </div>
-                                <small class="text-muted"></small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+  <div class="album">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
+          <strong>Success!</strong> {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+      {% endfor %}
+    {% endif %}
+    <div class="container">
+      <div class="container">
+      <a class="btn dropdown-toggle" style="float: right;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"></path>
+        </svg>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a class="dropdown-item" href="/donor_appointments">Appointments</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/donor_show_req">Blood requests</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/donor_update">Update Profile</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="donor_logout">Logout</a>
+        </li>
+        {{ redirect_to_login_immediately }}
+      </ul>
     </div>
-    {% endblock body %}
+      <header class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Donate Blood, Save Lives</h1>
+          <p class="lead">Your blood can help save lives. Find out how you can donate today.</p>
+          <a href="/about" class="btn btn-primary btn-lg">Learn More</a>
+        </div>
+      </header>
+<br>
+      <section class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fas fa-hand-holding-medical fa-3x"></i>
+                <h5 class="card-title mt-3">Donate Blood</h5>
+                <p class="card-text">Your blood donation can make a life-saving difference for someone in need.</p>
+                <a href="#" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fas fa-tint fa-3x"></i>
+                <h5 class="card-title mt-3">Check Blood reqests</h5>
+                <p class="card-text">Learn about the people in need of blood and helf them to get a better life.</p>
+                <a href="/donor_show_req" class="btn btn-primary">Blood requests</a>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <i class="fas fa-hospital fa-3x"></i>
+                <h5 class="card-title mt-3">Appointments</h5>
+                <p class="card-text">Check your Appointment Status and dta about your past Appointments.</p>
+                <a href="/donor_appointments" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </section>
+      
+      <section class="container my-5">
+        <h2 class="text-center mb-4">Why Donate Blood?</h2>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Save Lives</h5>
+                <p class="card-text">One blood donation can save up to three lives. Imagine the impact you could have.</p>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Community Impact</h5>
+                <p class="card-text">By donating blood, you are helping to support your local community and those in need.</p>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Health Benefits</h5>
+                <p class="card-text">Donating blood can help reduce your risk of heart disease, stroke, and certain types of cancer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </section>
+
+      <hr />
+      <h1>Hospitals Near You</h1>
+      <br>
+      <div class="row">
+        {% for j in hospd %}
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow box">
+              <img class="card-img-top box" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg" data-holder-rendered="true" />
+              <div class="card-body">
+                <b>Name:</b>{{ j.name }}<br />
+                <b>Email:</b> {{ j.email }} <br />
+                <b>Address:</b> {{ j.location.address }}, {{ j.location.landmark }}, {{ j.location.city }}, {{ j.location.state }} <br />
+                <b>Contact:</b> {{ j.contact_no1 }}
+
+                <p class="card-text"></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <form method="post" action="/donor_h_page">
+                      {% csrf_token %}
+                      <input type="hidden" name="data" value="{{ j.id_no }}" />
+                      <button type="submit" class="btn btn-sm btn-outline-secondary">Veiw Details</button>
+                    </form>
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

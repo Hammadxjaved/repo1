@@ -5,38 +5,39 @@
 
 {% block body %}
 
-<div class="album py-5 bg-light">
+<div class="album ">
     <div class="container">
-        <div class="row">
+        <h1>All Appointment</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Appoint. ID</th>
+                <th>Date of Request</th>
+                <th>Donor </th>
+                <th>Hospital</th>
+                <th>Hospital Address</th>
+                <th>Confirmed</th>
+                <th>Date Scheduled</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for appointment in app %}
+            <tr>
+                <td>{{appointment.id}}</td>
+                <td>{{ appointment.date_of_appointment|date:"F d, Y" }}</td>
+                <td>{{ appointment.donor_id.name }}</td>
+                <td>{{ appointment.hospital_id.name }}</td>
+                <td>{{appointment.hospital_id.location.address}}, {{appointment.hospital_id.location.landmark}}, {{appointment.hospital_id.location.city}}, {{appointment.hospital_id.location.state}}</td>
+                <td>{% if appointment.confirmed %}Yes{% else %}No{% endif %}</td>
+                <td>{{ appointment.date_scheduled|date:"F d, Y H:i" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-            {% for j in app %}
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top"
-                    data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                    alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;"
-                    src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg"
-                    data-holder-rendered="true"> 
-                    <div class="card-body">
-                    <b> Appointment id:</b> {{j.id}} <br>
-                       <b> Name of Donor: </b>{{j.donor_id.name}}<br>
-                       <b> Name of Hospital:</b> {{j.hospital_id.name}} <br>
-                       <b> Address of Hospital:</b> {{j.hospital_id.location.address}}, {{j.hospital_id.location.landmark}}, {{j.hospital_id.location.city}}, {{j.hospital_id.location.state}}<br>
-                       <b> Date of Request: </b> {{j.date_of_appointment}}<br>
-                       <b> confirmed: </b>{{j.confirmed}}<br>
-                       <b> Date of Appoinntment: </b> {{j.date_scheduled}}
-                        
-                        
-                        <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <button class="btn btn-primary" style="float: right;" onclick="goBack()">Go Back</button>
+
+
+            <a class="btn btn-primary" style="float: right;" href="/donor">Go Home</a>
       <script>
         function goBack() {
             window.history.back();

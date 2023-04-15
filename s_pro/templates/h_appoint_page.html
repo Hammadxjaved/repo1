@@ -5,11 +5,11 @@
 
 {% block body %}
 
-<section class="vh-200" style=" background-color: #f4f5f7;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+<section class="vh-200">
+  <div class="container h-100 ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
       <div class="col col-lg-6 mb-4 mb-lg-0" style="width: 900px;">
-        <div class="card mb-3" style="border-radius: .5rem;">
+        <div class="card mb-3 shadow-lg p-3 mb-5 bg-white rounded" style="border-radius: .5rem; ">
           <div class="row g-0">
             <div class="col-md-4 gradient-custom text-center"
               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
@@ -21,11 +21,10 @@
             </div>
             <div class="col-md-8">
               <div class="card-body p-4">
-                <h6>Information</h6>
-                <hr class="mt-0 mb-4">
+                <h5>Information</h5>
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
-                    <h6>date of Request</h6>
+                    <h6>Date of Request</h6>
                     <p class="text-muted">{{hosp.date_of_appointment}}</p>
                   </div>
                   <div class="col-6 mb-3">
@@ -34,43 +33,41 @@
                     <p class="text-muted">{{hosp.contact_no2}}</p>
                   </div>
                 </div>
-                <h6>Location</h6>
                 <hr class="mt-0 mb-4">
+                <h5>Location</h5>
                 <div class="row pt-1">
                   <div class="col-6">
                     <h6>Address</h6>
                     <p class="text-muted">{{hosp.donor_id.location.address}}, near {{hosp.donor_id.location.landmark}}</p>
                   </div>
-                  <div class="">
+                  <div class="col-6 mb-3">
                     <h6>City</h6>
-                    <p class="text-muted">{{hosp.donor_id.location.city}}</p>
+                    <p class="text-muted">{{hosp.donor_id.location.city}}, {{hosp.donor_id.location.state}}</p>
                   </div>
-                  <div class="mb-3">
-                    <h6>State</h6>
-                    <p class="text-muted">{{hosp.donor_id.location.state}}</p>
-                  </div>
+                  
                 </div>
                
                 <hr class="mt-0 mb-4">
-                <div class="mb-3">
+                <h5>Other details</h5>
+                <div class="row pt-1">
+
+                <div class="col-6">
                   <h6>Blood Group</h6>
                   <p class="text-muted">{{hosp.donor_id.blood_group}}</p>
                 </div>
-                <div class="mb-3">
+                <div class="col-6 mb-3">
                   <h6>Last Donated Blood on </h6>
                   <p class="text-muted">{{hosp.donor_id.health.last_donation_date}}</p>
                 </div>
-                <div class="mb-3">
+                <div class="col-6">
                   <h6>Age</h6>
                   <p class="text-muted">{{hosp.donor_id.age}}</p>
                 </div>
-                <div class="mb-3">
-                  <h6>Contact no</h6>
-                  <p class="text-muted">{{hosp.donor_id.contact_no1}}</p>
-                </div>
-                <div class="mb-3">
+                
+                <div class="col-6 mb-3">
                   <h6>Gender</h6>
                   <p class="text-muted">{{hosp.donor_id.gender}}</p>
+                </div>
                 </div>
                 
                 {% comment %} <form id="form_appoint" method="post" action="/donor_appoint">

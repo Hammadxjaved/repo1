@@ -39,123 +39,118 @@
       padding: 10px;
     }
   </style>
-{% endblock head %}
+{% endblock %}
 
 {% block body %}
-
-
-<div>
-  <form id="regForm" method="post">
-    {% csrf_token %}
-    <h1>Appointment Request:</h1>
-    <div class="form-control">
-      <label for="exampleInputEmail1"><h4>Info</h4></label>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Name</label>
-        <input type="text" value="{{ i.name }}" name="name" id="name" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Username</label>
-        <input type="text" value="{{ i.id_no }}" name="uname" id="uname" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
-      </div>
-
-      <div class="form-group">
-        <label for="exampleInputEmail1">Contact number</label>
-        <input type="text" value="{{ i.contact_no1 }}" id="phno" name="phno" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Age</label>
-        <input type="text" value="{{ i.age }}" id="phno" name="phno" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Blood group</label>
-        <input type="text" value="{{ i.blood_group }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        Any Piercing, Tattoo or surgery in last 6 months<input type="text" value="{{ i.health.piercing }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        Diabetic and takes insulin<input type="text" value="{{ i.health.diabetic }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        Disease<br />
-        <small id="emailHelp" class="form-text text-muted">Any Infectious diseases, such as HIV, hepatitis B or C, syphilis, malaria,<br /> heart disease, cancer or any type of blood related infection</small>
-        <input type="text" value="{{ i.health.disease }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      {% if i.gender == 'female' %}
-        <div class="form-group female-fields" id="female-fields">
-          Pregnent or child birth in last 1 year<input type="text" value="{{ i.health.preg }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+  <div>
+    <form id="regForm" method="post">
+      {% csrf_token %}
+      <h1>Appointment Request:</h1>
+      <div class="form-control">
+        <label for="exampleInputEmail1"><h4>Info</h4></label>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" value="{{ i.name }}" name="name" id="name" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
         </div>
-      {% endif %}
-      <div class="form-group female-fields" id="female-fields">
-        Last Blood Donation date<input type="text" value="{{ i.health.last_donation_date }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group female-fields" id="female-fields">
-        Weight<input type="number" value="{{ i.health.weight }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group female-fields" id="female-fields">
-        Hemoglobin level<input type="number" value="{{ i.health.hemoglobin_level }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Hospital</label>
-        <input type="text" value="{{ hosp.name }}" id="hospn" name="hospn" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Hospital Address</label>
-        <input type="text" value="{{ hosp.location.address }}, near {{ hosp.location.landmark }}, {{ hosp.location.city }}, {{ hosp.location.state }}" id="hospn" name="hospn" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
-      </div>
-      <br />
-      <div style="float:right;">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    </div>
-  </form>
-  <script>
-     const form = document.getElementById('regForm');
-        form.addEventListener('submit', function (event) {
-            // form validation code goes here
-            event.preventDefault();
-            const age1 = "{{i.age}}"
-            var age = parseInt(age1)
-            const g = "{{i.gender}}"
-            const w1 = "{{i.health.weight}}"
-            var w = parseInt(w1)
-            const d = "{{i.health.last_donation_date}}"
-            const hemo1 = "{{i.health.hemoglobin_level}}"
-            var hemo = parseFloat(hemo1)
-            const tattoo = "{{i.health.piercing}}"
-            const preg = "{{i.health.preg}}"
-            const dia = "{{i.health.diabetic}}"
-            const dis = "{{i.health.disease}}"
-            
-            function calculateAge(d) {
-                var date1 = new Date(d);
-                var date2 = new Date();
-                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-                return diffDays;
-            }
-            donation_time = calculateAge(d)  
-            
-             if (age<18 || age>65) {
-                alert("Not ELIGIBLE age")
-            }
-            else if(w<50){
-                alert("Not ELIGIBLE weight")                
-            }
-            else if(hemo<12.5){
-                alert("Not ELIGIBLE hemo")                
-            }
-            else if(donation_time<100){
-                alert("Not ELIGIBLE blood time")                
-            }
-            else if(tattoo=="True" || preg=="True" || dia=="True" || dis=="True"){
-                alert("Not ELIGIBLE")                
-            }
-            else{
-                form.submit(); 
-            }
-        });
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" value="{{ i.id_no }}" name="uname" id="uname" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" disabled />
+        </div>
 
-    </script>
-    {% endblock body %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Contact number</label>
+          <input type="text" value="{{ i.contact_no1 }}" id="phno" name="phno" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Age</label>
+          <input type="text" value="{{ i.age }}" id="phno" name="phno" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Blood group</label>
+          <input type="text" value="{{ i.blood_group }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          Any Piercing, Tattoo or surgery in last 6 months<input type="text" value="{{ i.health.piercing }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          Diabetic and takes insulin<input type="text" value="{{ i.health.diabetic }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          Disease<br />
+          <small id="emailHelp" class="form-text text-muted">Any Infectious diseases, such as HIV, hepatitis B or C, syphilis, malaria,<br /> heart disease, cancer or any type of blood related infection</small>
+          <input type="text" value="{{ i.health.disease }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        {% if i.gender == 'female' %}
+          <div class="form-group female-fields" id="female-fields">
+            Pregnent or child birth in last 1 year<input type="text" value="{{ i.health.preg }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+          </div>
+        {% endif %}
+        <div class="form-group female-fields" id="female-fields">
+          Last Blood Donation date<input type="text" value="{{ i.health.last_donation_date }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group female-fields" id="female-fields">
+          Weight<input type="number" value="{{ i.health.weight }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group female-fields" id="female-fields">
+          Hemoglobin level<input type="number" value="{{ i.health.hemoglobin_level }}" id="bg" name="bg" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Hospital</label>
+          <input type="text" value="{{ hosp.name }}" id="hospn" name="hospn" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Hospital Address</label>
+          <input type="text" value="{{ hosp.location.address }}, near {{ hosp.location.landmark }}, {{ hosp.location.city }}, {{ hosp.location.state }}" id="hospn" name="hospn" class="form-control" aria-describedby="emailHelp" placeholder="Enter Contacct number" disabled />
+        </div>
+        <br />
+      </div>
+      <br>
+      <div style="float:right;">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <br>
+    </form>
+  </div>
+  <script>
+    const form = document.getElementById('regForm')
+    form.addEventListener('submit', function (event) {
+      // form validation code goes here
+      event.preventDefault()
+      const age1 = '{{i.age}}'
+      var age = parseInt(age1)
+      const g = '{{i.gender}}'
+      const w1 = '{{i.health.weight}}'
+      var w = parseInt(w1)
+      const d = '{{i.health.last_donation_date}}'
+      const hemo1 = '{{i.health.hemoglobin_level}}'
+      var hemo = parseFloat(hemo1)
+      const tattoo = '{{i.health.piercing}}'
+      const preg = '{{i.health.preg}}'
+      const dia = '{{i.health.diabetic}}'
+      const dis = '{{i.health.disease}}'
+    
+      function calculateAge(d) {
+        var date1 = new Date(d)
+        var date2 = new Date()
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime())
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24))
+        return diffDays
+      }
+      donation_time = calculateAge(d)
+    
+      if (age < 18 || age > 65) {
+        alert('Not ELIGIBLE age')
+      } else if (w < 50) {
+        alert('Not ELIGIBLE weight')
+      } else if (hemo < 12.5) {
+        alert('Not ELIGIBLE hemo')
+      } else if (donation_time < 100) {
+        alert('Not ELIGIBLE blood time')
+      } else if (tattoo == 'True' || preg == 'True' || dia == 'True' || dis == 'True') {
+        alert('Not ELIGIBLE')
+      } else {
+        form.submit()
+      }
+    })
+  </script>
+{% endblock %}

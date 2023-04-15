@@ -153,7 +153,7 @@ def p_req(request):
         messages.success(request, 'Updated successfully')
         return redirect('/patient')
 
-    req1 = blood_request.objects.filter(patient_id=request.session['uname'],recieved = False)
+    req1 = blood_request.objects.filter(patient_id=request.session['uname'])
     if blood_request_response.objects.filter(patient_id=request.session['uname']).exists():
         req2 = blood_request_response.objects.filter(patient_id=request.session['uname'])
     else:
@@ -177,13 +177,12 @@ def p_make_req(request):
 
         today = datetime.date.today()
         uname = request.session['uname']
-        if blood_request.objects.filter(patient_id=uname).exists():
-            user = blood_request.objects.get(patient_id=uname)
+        if blood_request.objects.filter(patient_id=uname,recieved=False).exists():
+            user = blood_request.objects.get(patient_id=uname,recieved=False)
             user.date_of_request=today
             user.hospital_name=hosp
             user.hospital_add=hosp_add
             user.quantity=quan
-            user.recieved = False
             user.donor_id = None 
             user.date_of_response = None
             user.save()

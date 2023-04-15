@@ -12,52 +12,65 @@
 
 {% block body %} 
 
-<div class="album py-5 bg-light">
+<div class="album">
     <div class="container">
         <div class="row">
-
-            {% for j in r %}
-            <div class="col-md-4" >
-                <div class="card mb-4 box-shadow box">
-                    
-                    <div class="card-body">
-                       Patient name : {{j.patient_id.name}}<br>
-                       Patient name : {{j.patient_id.id_no}}<br>
-                        hospital name: {{j.hospital_name}}<br>
-                        Address of Hospital: {{j.hospital_add}}
-                        date of request: {{j.date_of_request}}<br>
-                        Queantity required: {{j.quantity}}<br>
-                        
-                        
-                        {% if j.recieved %}
-                        Name of donor: {{j.donor_id}}
-                        date of respose{{j.date_of_response}}<br>
-                        {% endif %}
-                        <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
+            <div class="col-md-12">
+                <h1>Blood Requests</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date of Request</th>
+                            <th>Patient ID</th>
+                            <th>Hospital Name</th>
+                            <th>Hospital Address</th>
+                            <th>Quantity</th>
+                            <th>Recieved</th>
+                            <th>Date of Response</th>
+                            <th>Donor ID</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in r %}
+                            <tr>
+                                <td>{{ request.date_of_request }}</td>
+                                <td>{{ request.patient_id.id_no }}</td>
+                                <td>{{ request.hospital_name }}</td>
+                                <td>{{ request.hospital_add }}</td>
+                                <td>{{ request.quantity }}</td>
+                                <td>{% if request.recieved %}Yes{% else %}No{% endif %}</td>
+                                <td>{{ request.date_of_response }}</td>
+                                {% if not request.recieved %}
+                                <td>
                                     <form method="post" action="#">
                                         {% csrf_token %}
                                         <select class="form-control" name="d_id" id="d_id" required>
-                                            <option value="">Select Donor who donated</option>
+                                            <option value="">Select Donor</option>
                                             {% for i in r2 %}
-                                            <option value="{{i.donor_id.id_no}}">{{i.donor_id.name}}</option>
+                                            <option value="{{request.donor_id.id_no}}">{{i.donor_id.name}} - {{i.donor_id.contact_no1}}</option>
                                             {% endfor %}
                                             <option value="none">Some Other</option>
                                             
                                         </select>
-                                        <input type="hidden" name="data" value="{{j.id}}">
-                                        <br>
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Blood revcieved</button>
+                                        <input type="hidden" name="data" value="{{request.id}}">
+                                        
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Revcieved</button>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+
+                                </td>
+                                {% else %}
+                                <td>{{ request.donor_id.name}}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            <button class="btn btn-primary" style="float: right;" onclick="goBack()">Go Back</button>
+        </div>
+        <a class="btn btn-primary" style="float: right;" href="/patient">Go Home</a>
+    </div>
+   
       <script>
         function goBack() {
             window.history.back();
