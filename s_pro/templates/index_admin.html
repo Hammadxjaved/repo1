@@ -6,7 +6,112 @@
 {% endblock head %}
 
 {% block body %}
+<div class="container">
     <h1>Admin Home Page</h1>
+    <div class="container mt-4">
+        <h3>Donors</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>John Doe</td>
+              <td>johndoe@example.com</td>
+              <td>123-456-7890</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jane Smith</td>
+              <td>janesmith@example.com</td>
+              <td>123-456-7890</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Patients</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>John Doe</td>
+              <td>johndoe@example.com</td>
+              <td>123-456-7890</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jane Smith</td>
+                <td>janesmith@example.com</td>
+                <td>123-456-7890</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Hospitals</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>ABC Hospital</td>
+                <td>123 Main St, Anytown USA</td>
+                <td>123-456-7890</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>XYZ Hospital</td>
+                <td>456 Oak St, Anytown USA</td>
+                <td>123-456-7890</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Blood Requests</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Hospital</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>ABC Hospital</td>
+                <td>123 Main St, Anytown USA</td>
+                <td>123-456-7890</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>XYZ Hospital</td>
+                <td>456 Oak St, Anytown USA</td>
+                <td>123-456-7890</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
     <a href="admin_user_logout" class="btn btn-primary">Logout</a>
     {{ redirect_to_login_immediately }}
+
+</div>
     {% endblock body %}
