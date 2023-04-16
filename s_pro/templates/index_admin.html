@@ -6,7 +6,16 @@
 {% endblock head %}
 
 {% block body %}
+{% if messages %} 
+      {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show mx-5" role="alert">
+          <strong>Success!</strong> {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    {% endif %}
 <div class="container">
+  
     <h1>Admin Home Page</h1>
     <div class="container mt-4">
         <h3>Donors</h3>
@@ -16,22 +25,27 @@
               <th scope="col">ID</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">Phone</th>
+              <th scope="col">Age</th>
+              <th scope="col">View</th>
+
             </tr>
           </thead>
           <tbody>
+            {% for d in donors %}
             <tr>
-              <th scope="row">1</th>
-              <td>John Doe</td>
-              <td>johndoe@example.com</td>
-              <td>123-456-7890</td>
+              <th scope="row">{{d.id_no}}</th>
+              <td>{{d.name}}</td>
+              <td>{{d.email}}</td>
+              <td>{{d.age}}</td>
+              <td>
+                <form action="/admin_user_d_page" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{d.id_no}}" name="id_no">
+                <button class="btn btn-primary" type="submit"> View </button>
+              </form>
+              </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jane Smith</td>
-              <td>janesmith@example.com</td>
-              <td>123-456-7890</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
         <h3>Patients</h3>
@@ -41,7 +55,7 @@
               <th scope="col">ID</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
-              <th scope="col">Phone</th>
+              <th scope="col">Age</th>
             </tr>
           </thead>
           <tbody>
@@ -84,34 +98,7 @@
               </tr>
             </tbody>
           </table>
-          <h3>Blood Requests</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Patient Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Hospital</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>ABC Hospital</td>
-                <td>123 Main St, Anytown USA</td>
-                <td>123-456-7890</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>XYZ Hospital</td>
-                <td>456 Oak St, Anytown USA</td>
-                <td>123-456-7890</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-    <a href="admin_user_logout" class="btn btn-primary">Logout</a>
-    {{ redirect_to_login_immediately }}
+          
 
 </div>
     {% endblock body %}

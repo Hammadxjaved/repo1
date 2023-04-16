@@ -25,6 +25,16 @@
     /*Without this, clicking will make it sticky*/
       pointer-events: none;
   } {% endcomment %}
+  .navbar-nav li:hover {
+    background-color:aliceblue;
+  }
+  .navbar-nav li:hover a {
+    color:black;
+  }
+  .navbar-nav li:hover a.active {
+    color:black;
+  }
+  
   </style>
 
   <link rel="stylesheet" href="static\w3.css">
@@ -33,24 +43,95 @@
 
 <body>
   
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <nav class="mynav navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Blood Donation System</a>
+      <a class="navbar-brand" href="/">Blood Donation System</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
         aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/about">About Blood Donation</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+ 
+          {% with uname=request.session.uname %}
+                    {% if uname.0 == 'D' %}
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/donor' %}active{% endif %}" aria-current="page" href="/donor">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/donor_appointments' %}active{% endif %}" href="/donor_appointments">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/donor_show_req' %}active{% endif %}" href="/donor_show_req">Blood Requests</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/donor_update' %}active{% endif %}" href="/donor_update">Update Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/donor_logout' %}active{% endif %}" href="/donor_logout">Logout</a>
+                    </li>
+        {{ redirect_to_login_immediately }}
+
+                    {% elif uname.0 == 'P' %}
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/patient' %}active{% endif %}" aria-current="page" href="/patient">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/patient_make_req' %}active{% endif %}" href="/patient_make_req">Make Blood Request</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/patient_req' %}active{% endif %}" href="/patient_req">Blood Requests</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/patient_update' %}active{% endif %}" href="/patient_update">Update Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/patient_logout' %}active{% endif %}" href="/patient_logout">Logout</a>
+                    </li>
+        {{ redirect_to_login_immediately }}
+
+                    {% elif uname.0 == 'H' %}
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/hospital' %}active{% endif %}" aria-current="page" href="/patient">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/hospital_appoints' %}active{% endif %}" href="/hospital_appoints">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/hospital_scheduled_appoints' %}active{% endif %}" href="/hospital_scheduled_appoints">Approved Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/hospital_update' %}active{% endif %}" href="/hospital_update">Update Profile</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/hospital_logout' %}active{% endif %}" href="/hospital_logout">Logout</a>
+                    </li>
+        {{ redirect_to_login_immediately }}
+
+
+                    {% elif uname.0 == 'a' %}
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/admin_user' %}active{% endif %}" aria-current="page" href="/patient">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/admin_user_show_req' %}active{% endif %}" href="/admin_user_show_req">Blood Requests</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/admin_user_logout' %}active{% endif %}" href="/admin_user_logout">Logout</a>
+                    </li>
+                    {{ redirect_to_login_immediately }}
+
+                    {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link {% if request.path == '/about' %}active{% endif %}" aria-current="page" href="/about">About Blood Donation</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle active" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
               Register
             </a>
             <ul class="dropdown-menu">
@@ -62,26 +143,28 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Login
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/donor_login">Donor</a></li>
-              <li><a class="dropdown-item" href="/patient_login">Patient</a></li>
-              <li><a class="dropdown-item" href="/hospital_login">Hospital</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="/admin">Admin</a></li>
-            </ul>
+            aria-expanded="false">
+            Login
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/donor_login">Donor</a></li>
+            <li><a class="dropdown-item" href="/patient_login">Patient</a></li>
+            <li><a class="dropdown-item" href="/hospital_login">Hospital</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="/admin_user">Admin</a></li>
+          </ul>
           </li>
+          {% endif %}
+        {% endwith %}
         </ul> 
         <form class="d-flex" method="post" action="/h_search">
-            {% csrf_token %}
-            <select class="form-control mr-sm-2 mx-2" name="city" id="city" required>
-              <option value="">---Search Hospital---</option>
-              <option value="Aligarh">Aligarh</option>
-              <option value="New Delhi">New Delhi</option>
+          {% csrf_token %}
+          <select class="form-control mr-sm-2 mx-2" name="city" id="city" required>
+            <option value="">---Search Hospital---</option>
+            <option value="Aligarh">Aligarh</option>
+            <option value="New Delhi">New Delhi</option>
               <option value="Mumbai">Mumbai</option>
               <option value="Bangalore">Bangalore</option>
               <option value="Hyderabad">Hyderabad</option>

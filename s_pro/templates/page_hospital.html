@@ -101,8 +101,8 @@
                     </tbody>
                   </table>
 
-                  {% with firstname=request.session.uname %}
-                    {% if firstname.0 == 'D' %}
+                  {% with uname=request.session.uname %}
+                    {% if uname.0 == 'D' %}
                       <a href="/donor_appoint" class="btn btn-primary">Schedule Appointment</a>
                     {% endif %}
                   {% endwith %}

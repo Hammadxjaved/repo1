@@ -300,4 +300,4 @@ def d_h_page(request):
 def d_logout(request):
     del request.session['uname']
     logout(request)
-    return redirect('/donor_login')
+    return redirect('/')

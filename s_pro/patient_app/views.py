@@ -202,4 +202,4 @@ def p_make_req(request):
 def p_logout(request):
     del request.session['uname']
     logout(request)
-    return redirect('/patient_login')
+    return redirect('/')

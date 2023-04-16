@@ -223,4 +223,4 @@ def h_appoint_page(request):
 def h_logout(request):
     del request.session['uname']
     logout(request)
-    return redirect('/hospital_login')
+    return redirect('/')

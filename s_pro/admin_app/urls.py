@@ -19,6 +19,11 @@ from admin_app import views
 
 urlpatterns = [
 path('', views.a_index,name= 'homepage'),
+path('_d_page', views.a_d_page,name= 'donorpage'),
+path('_d_del', views.a_d_del,name= 'donordelete'),
+path('_h_page', views.a_h_page,name= 'hosppage'),
+path('_p_page', views.a_p_page,name= 'patientpage'),
+path('_show_req', views.a_show_req,name= 'showreq'),
 path('_login', views.a_login,name= 'login'),
 path('_logout', views.a_logout,name= 'logout'),
 ]
