@@ -15,17 +15,17 @@ from hospital_app.models import *
 @login_required(login_url='/admin_user_login')
 def a_index(request):
     donors = donor_details.objects.all()
-    hospitals = patient_details.objects.all()
-    patients = hospital_details.objects.all()
+    patients = patient_details.objects.all()
+    hospitals = hospital_details.objects.all()
     context = {
         "donors":donors,
-        "hosps":hospitals,
+        "hospitals":hospitals,
         "patients":patients
     }
     return render(request,'index_admin.html',context)
 
 
-
+#donor delete
 @login_required(login_url='/admin_user_login')
 def a_d_del(request):
     if "d_id" in request.session:
@@ -37,7 +37,7 @@ def a_d_del(request):
         return redirect("/admin_user")
     return redirect("/admin_user")
 
-
+#donor page
 @login_required(login_url='/admin_user_login')
 def a_d_page(request):
     if request.method == "POST":
@@ -50,7 +50,7 @@ def a_d_page(request):
     return redirect("/admin_user")
 
 
-
+#hospital page
 @login_required(login_url='/admin_user_login')
 def a_h_page(request):
     if request.method == "POST":
@@ -59,20 +59,24 @@ def a_h_page(request):
         user = hospital_details.objects.get(id_no=id_no)
         app = appointment_scheduled.objects.filter(hospital_id=id_no)
         
-        return render(request,'a_d_page.html',{"h":user, "app":app})
+        return render(request,'a_h_page.html',{"h":user, "app":app})
     return redirect("/admin_user")
 
+
+#hospital delete
 @login_required(login_url='/admin_user_login')
 def a_h_del(request):
     if "h_id" in request.session:
         id_no = request.session["h_id"]
         User.objects.get(username = id_no).delete()
-        blood_quantity.objects.get(donor_id = id_no).delete()
-        hospital_address.objects.get(id_no = id_no).delete()
+        blood_quantity.objects.get(hospital_id = id_no).delete()
+        hospital_address.objects.get(hospital_id = id_no).delete()
         messages.success(request, 'Hospital Removed Successfully')
         return redirect("/admin_user")
     return redirect("/admin_user")
 
+
+#patient page
 @login_required(login_url='/admin_user_login')
 def a_p_page(request):
     if request.method == "POST":
@@ -80,23 +84,29 @@ def a_p_page(request):
         request.session["p_id"] = id_no
         user = patient_details.objects.get(id_no=id_no)
         req = blood_request.objects.filter(patient_id=id_no)
-        return render(request,'a_d_page.html',{"p":user, "req":req})
+        return render(request,'a_p_page.html',{"p":user, "req":req})
     return redirect("/admin_user")
 
+
+#patient delete
 @login_required(login_url='/admin_user_login')
 def a_p_del(request):
     if "p_id" in request.session:
         id_no = request.session["p_id"]
         User.objects.get(username = id_no).delete()
-        patient_address.objects.get(donor_id = id_no).delete()
+        patient_address.objects.get(patient_id = id_no).delete()
         messages.success(request, 'Patient Removed Successfully')
         return redirect("/admin_user")
     return redirect("/admin_user")
 
 
+#show blood requests
 @login_required(login_url='/admin_user_login')
 def a_show_req(request):
-    return render(request,'a_show_req.html')
+    req = blood_request.objects.filter(recieved=False)
+    return render(request,'a_show_req.html',{"r":req})
+
+
 
 def a_login(request):
     if 'uname' in request.session:

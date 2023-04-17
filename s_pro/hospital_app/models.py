@@ -5,7 +5,7 @@ from django.contrib.auth.models import *
 
 # Create your models here.
 class hospital_address(models.Model):
-    hopital_id =  models.CharField(max_length=40, primary_key=True)
+    hospital_id =  models.CharField(max_length=40, primary_key=True)
     state = models.CharField(max_length=40) 
     city = models.CharField(max_length=40) 
     address = models.CharField(max_length=100) 
@@ -13,7 +13,7 @@ class hospital_address(models.Model):
 
 
 class blood_quantity(models.Model):
-    hopital_id =  models.CharField(max_length=40,primary_key=True)
+    hospital_id =  models.CharField(max_length=40,primary_key=True)
     bg_O_pos = models.IntegerField()
     bg_O_neg = models.IntegerField()
     bg_B_pos = models.IntegerField()

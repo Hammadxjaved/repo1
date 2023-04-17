@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}
+  Blood Requests
+{% endblock %}
+{% block head %}
+  <style> 
+    .box {
+      border-radius: 25px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+
+<div class="album">
+  <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h1>All Requests</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Date of Request</th>
+                        <th>Patient Name</th>
+                        <th>Hospital Name</th>
+                        <th>Hospital Address</th>
+                        <th>Quantity</th>
+                       
+                        
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in r %}
+                        <tr>
+                            <td>{{ request.id }}</td>
+                            <td>{{ request.date_of_request }}</td>
+                            <td>{{ request.patient_id.name }}({{ request.patient_id.id_no }})</td>
+                            <td>{{ request.hospital_name }}</td>
+                            <td>{{ request.hospital_add }}</td>
+                            <td>{{ request.quantity }} units</td>
+                           
+                           
+                           
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <a class="btn btn-primary" style="float: right;" href="/admin_user">Go Home</a>
+
+  </div>
+    </div>
+  </div>
+{% endblock %}

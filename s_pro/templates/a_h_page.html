@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block title %}
+  Hospital page
+{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+  <section class="vh-200">
+    <div class="container py-3 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0" style="width: 1000px;">
+          <div class="container card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center" style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="https://medibhai.com/uploads/hospital_image/hospital-profile-default.jpg" alt="Avatar" class="img-fluid px-5" style="width: 100%; height: 200px; margin-top: 15%;" />
+                <h5>{{ h.name }}</h5>
+                <p></p>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <i><h5>Information</h5></i>
+                  
+                  <div class="row ">
+                    <div class="col-6">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{ h.email }}</p>
+                    </div>
+                    <div class="col-6">
+                      <h6>Phone</h6>
+                      <p class="text-muted">{{ h.contact_no1 }}, {{ h.contact_no2 }}</p>
+                    </div>
+                  </div>
+                  <hr class="mt-0" />
+                 <i> <h5>Location</h5></i>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <h6>Address</h6>
+                      <p class="text-muted">{{ h.location.address }}, near {{ h.location.landmark }}</p>
+                    </div>
+                    <div class="col-6">
+                      <h6>City</h6>
+                      <p class="text-muted">{{ h.location.city }}, {{ h.location.state }}</p>
+                    </div>
+                  </div>
+                  <hr class="mt-0 mb-4" />
+                 <i><h5>Blood Available</h5></i>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Blood Group</th>
+                        <th scope="col">Quantity (in units)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">A+</th>
+                        <td>{{ h.blood_quant.bg_A_pos }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">A-</th>
+                        <td>{{ h.blood_quant.bg_A_neg }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">B+</th>
+                        <td>{{ h.blood_quant.bg_B_pos }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">B-</th>
+                        <td>{{ h.blood_quant.bg_B_neg }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">AB+</th>
+                        <td>{{ h.blood_quant.bg_AB_pos }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">AB-</th>
+                        <td>{{ h.blood_quant.bg_AB_neg }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">O+</th>
+                        <td>{{ h.blood_quant.bg_O_pos }}</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">O-</th>
+                        <td>{{ h.blood_quant.bg_O_neg }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Updated</th>
+                        <td>{{ h.blood_quant.last_updated }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+                <div class="my-3">
+                    <h1>All Appointment</h1>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Appoint. ID</th>
+                        <th>Date of Request</th>
+                        <th>Donor </th>
+                        <th>Confirmed</th>
+                        <th>Date Scheduled</th>
+                    </tr>
+                </thead>
+                  <tbody>
+                    {% for appointment in app %}
+                    <tr>
+                        <td>{{appointment.id}}</td>
+                        <td>{{ appointment.date_of_appointment|date:"F d, Y" }}</td>
+                        <td>{{ appointment.donor_id.id_no }}</td>
+                        
+                        <td>{% if appointment.confirmed %}Yes{% else %}No{% endif %}</td>
+                        <td>{{ appointment.date_scheduled|date:"F d, Y H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+          
+                </div>
+                <a class="btn btn-primary my-4" style="width: 100px; " href="/admin_user">Go Home</a>
+                        <a class="btn btn-danger mx-5 my-4" style="width: 120px;" href="/admin_user_h_del"> Delete User</a> 
+                      </div>
+                </div>
+           
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

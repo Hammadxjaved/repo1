@@ -56,22 +56,27 @@
               <th scope="col">Name</th>
               <th scope="col">Email</th>
               <th scope="col">Age</th>
+              <th scope="col">View</th>
+
             </tr>
           </thead>
           <tbody>
+            {% for p in patients %}
             <tr>
-              <th scope="row">1</th>
-              <td>John Doe</td>
-              <td>johndoe@example.com</td>
-              <td>123-456-7890</td>
+              <th scope="row">{{p.id_no}}</th>
+              <td>{{p.name}}</td>
+              <td>{{p.email}}</td>
+              <td>{{p.age}}</td>
+              <td>
+                <form action="/admin_user_p_page" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{p.id_no}}" name="id_no">
+                <button class="btn btn-primary" type="submit"> View </button>
+              </form>
+              </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jane Smith</td>
-                <td>janesmith@example.com</td>
-                <td>123-456-7890</td>
-              </tr>
-            </tbody>
+            {% endfor %}
+          </tbody>
           </table>
           <h3>Hospitals</h3>
           <table class="table">
@@ -79,25 +84,30 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">City</th>
+                <th scope="col">View</th>
+  
               </tr>
             </thead>
             <tbody>
+              {% for h in hospitals %}
               <tr>
-                <th scope="row">1</th>
-                <td>ABC Hospital</td>
-                <td>123 Main St, Anytown USA</td>
-                <td>123-456-7890</td>
+                <th scope="row">{{h.id_no}}</th>
+                <td>{{h.name}}</td>
+                <td>{{h.email}}</td>
+                <td>{{h.location.city}}</td>
+                <td>
+                  <form action="/admin_user_h_page" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{h.id_no}}" name="id_no">
+                  <button class="btn btn-primary" type="submit"> View </button>
+                </form>
+                </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>XYZ Hospital</td>
-                <td>456 Oak St, Anytown USA</td>
-                <td>123-456-7890</td>
-              </tr>
+              {% endfor %}
             </tbody>
-          </table>
+            </table>
           
 
 </div>
