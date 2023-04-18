@@ -7,6 +7,12 @@
     .box {
       border-radius: 25px;
     }
+  
+
+      .tablediv {
+       overflow-x:scroll;
+     }
+
   </style>
 {% endblock %}
 
@@ -17,6 +23,7 @@
       <div class="row">
         <div class="col-md-12">
             <h1>All Requests</h1>
+            <div class="tablediv">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -48,6 +55,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
         </div>
     </div>
     

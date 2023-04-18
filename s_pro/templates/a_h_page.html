@@ -3,6 +3,12 @@
   Hospital page
 {% endblock %}
 {% block head %}
+<style>
+
+ .tablediv {
+  overflow-x:scroll;
+}
+</style>
 
 {% endblock %}
 
@@ -104,6 +110,7 @@
             </div>
                 <div class="my-3">
                     <h1>All Appointment</h1>
+                    <div class="tablediv">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -127,6 +134,7 @@
                     {% endfor %}
                   </tbody>
                 </table>
+              </div>
           
                 </div>
                 <a class="btn btn-primary my-4" style="width: 100px; " href="/admin_user">Go Home</a>

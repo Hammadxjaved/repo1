@@ -16,7 +16,7 @@
             font-family: Raleway;
             padding: 40px;
             width: 70%;
-            min-width: 300px;
+            
             border-radius: 10px;
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255,255,255,0.1);
@@ -39,6 +39,19 @@
             padding: 10px;
          
         }
+        @media screen and (max-width: 600px) {
+            body {
+              margin: 0;
+            }
+            div.form-control {
+                margin: 0;
+                padding: 0;
+            }
+            #regForm {
+                padding: 15px;
+                width: 95%;
+            }
+          }
     </style>
 
     {% endblock head %}
@@ -111,6 +124,8 @@
         <div style="float:right;">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+        <br>
+        <br>
         </div>
     </form>
     <script>

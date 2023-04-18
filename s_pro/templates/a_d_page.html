@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Appointment Page{% endblock title %}
 {% block head %}
+<style>
+
+  .tablediv {
+   overflow-x:scroll;
+ }
+ </style>
 {% endblock head %}
 
 {% block body %}
@@ -111,6 +117,7 @@
             </div>
 <div class="my-3">
             <h1>All Appointment</h1>
+            <div class="tablediv">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -137,9 +144,11 @@
             {% endfor %}
           </tbody>
         </table>
+      </div>
     </div>
     <div  class="my-3">
         <h1>Donated blood to</h1>
+        <div class="tablediv">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -166,6 +175,7 @@
                 {% endfor %}
             </tbody> 
         </table>
+      </div>
     </div>
     <a class="btn btn-primary " style="width: 100px; " href="/admin_user">Go Home</a>
             <a class="btn btn-danger mx-5" style="width: 120px;" href="/admin_user_d_del"> Delete User</a> 

@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Hospital Scheduled Appointments{% endblock title %}
 {% block head %}
+<style>
+  .tablediv {
+    overflow-x:scroll;
+  }
+</style>
 {% endblock head %}
 
 {% block body %}
 <div class="album ">
     <div class="container">
         <h1>All Appointment</h1>
+        <div class="tablediv">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -15,7 +21,6 @@
                 <th>Donor </th>
                 <th>Blood Group</th>
                 <th>Weight</th>
-                
                 <th>Date Scheduled</th>
             </tr>
           </thead>
@@ -33,7 +38,7 @@
             {% endfor %}
           </tbody>
         </table>
-
+</div>
 
 
             <a class="btn btn-primary" style="float: right;" href="/hospital">Go Home</a>

@@ -7,6 +7,9 @@
         
   border-radius: 25px;
     }
+    .tablediv {
+        overflow-x:scroll;
+      }
 </style>
 {% endblock head %}
 
@@ -17,6 +20,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Blood Requests</h1>
+                <div class="tablediv">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -66,6 +70,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
         <a class="btn btn-primary" style="float: right;" href="/patient">Go Home</a>
