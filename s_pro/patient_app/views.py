@@ -28,7 +28,7 @@ def p_index(request):
         logout(request)
         return redirect('/donor_login')
     hosp_detail = hospital_details.objects.all()
-    return render(request,'index_patient.html',{"hospd":hosp_detail})
+    return render(request,'patient/index_patient.html',{"hospd":hosp_detail})
 
 def p_login(request):
     if 'uname' in request.session:
@@ -53,7 +53,7 @@ def p_login(request):
             messages.success(request, 'Username or Password is incorrect!!')
             
 
-    return render (request,'login_patient.html')
+    return render (request,'patient/login_patient.html')
 
 def p_signup(request):
     if request.method=='POST':
@@ -102,7 +102,7 @@ def p_signup(request):
         
         return redirect('/patient_login')
     users = User.objects.all()
-    return render (request,'signup_patient.html',{"users":users})
+    return render (request,'patient/signup_patient.html',{"users":users})
 
 @user_passes_test(in_my_group,login_url='/patient_login')
 def p_update(request):
@@ -136,7 +136,7 @@ def p_update(request):
         return redirect('/patient')
     p_uname = request.session['uname']
     p_user = patient_details.objects.get(id_no=p_uname)
-    return render(request,"p_update.html",{"j":p_user})
+    return render(request,"patient/p_update.html",{"j":p_user})
 
 @user_passes_test(in_my_group,login_url='/patient_login')
 def p_req(request):
@@ -159,7 +159,7 @@ def p_req(request):
     else:
         req2 =""
     
-    return render(request,"p_req.html",{"r":req1,"r2":req2})
+    return render(request,"patient/p_req.html",{"r":req1,"r2":req2})
 
 @user_passes_test(in_my_group,login_url='/patient_login')
 def p_make_req(request):
@@ -195,7 +195,7 @@ def p_make_req(request):
     p_uname = request.session['uname']
     p_user = patient_details.objects.get(id_no=p_uname)
     hosp = hospital_details.objects.all()
-    return render(request,"p_make_req.html",{"i":p_user,"j":hosp})
+    return render(request,"patient/p_make_req.html",{"i":p_user,"j":hosp})
 
 
 

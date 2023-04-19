@@ -46,14 +46,14 @@ def h_index(request):
         except:
             a = 1
         messages.success(request, 'Appointment confirmed successfully!!')
-        return render(request, 'index_hospital.html')
+        return render(request, 'hospital/index_hospital.html')
 
     a = request.session['uname']
     if a[0] != 'H':
         logout(request)
         return redirect('/hospital_login')
     hosp = hospital_details.objects.get(id_no=a)
-    return render(request, 'index_hospital.html',{"hosp":hosp})
+    return render(request, 'hospital/index_hospital.html',{"hosp":hosp})
 
 
 # @user_passes_test(in_my_group,login_url='/hospital_login')
@@ -85,7 +85,7 @@ def h_login(request):
         else:
             messages.success(request, 'Username or Password is incorrect!!')
 
-    return render(request, 'login_hospital.html')
+    return render(request, 'hospital/login_hospital.html')
 
 
 def h_signup(request):
@@ -143,7 +143,7 @@ def h_signup(request):
 
         return redirect('/hospital_login')
     users = User.objects.all()
-    return render(request, 'signup_hospital.html',{"users":users})
+    return render(request, 'hospital/signup_hospital.html',{"users":users})
 
 
 @user_passes_test(in_my_group, login_url='/hospital_login')
@@ -189,7 +189,7 @@ def h_update(request):
 
     h_uname = request.session['uname']
     h_user = hospital_details.objects.get(id_no=h_uname)
-    return render(request, "h_update.html", {"j": h_user})
+    return render(request, "hospital/h_update.html", {"j": h_user})
 
 
 @user_passes_test(in_my_group, login_url='/hospital_login')
@@ -197,7 +197,7 @@ def h_scheduled_appoint(request):
     h_uname = request.session['uname']
     appoint = appointment_scheduled.objects.filter(
         hospital_id=h_uname, confirmed=True)
-    return render(request, "h_scheduled_appoint.html", {"app": appoint})
+    return render(request, "hospital/h_scheduled_appoint.html", {"app": appoint})
 
 
 @user_passes_test(in_my_group, login_url='/hospital_login')
@@ -207,12 +207,12 @@ def h_appoint(request):
         d_id = request.POST.get('d_id')
         id = request.POST.get('id_no')
         appoint = appointment_scheduled.objects.get(id=id)
-        return render(request, "h_appoint_page.html", {"hosp": appoint})
+        return render(request, "hospital/h_appoint_page.html", {"hosp": appoint})
 
     h_uname = request.session['uname']
     appoint = appointment_scheduled.objects.filter(
         hospital_id=h_uname, confirmed=False)
-    return render(request, "h_appoint.html", {"app": appoint})
+    return render(request, "hospital/h_appoint.html", {"app": appoint})
 
 
 @user_passes_test(in_my_group, login_url='/hospital_login')

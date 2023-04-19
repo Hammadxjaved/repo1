@@ -24,14 +24,16 @@ def in_my_group(user):
 # Index page
 @user_passes_test(in_my_group,login_url='/donor_login')
 def d_index(request):
-    a=request.session['uname']
+    a=""
+    if "uname" in request.session:
+        a=request.session['uname']
     if a[0]!='D':
         logout(request)
         return redirect('/donor_login')
     
     # hospitals = hospital_details.objects.all()
     hosp_detail = hospital_details.objects.all()
-    return render(request,'index_donor.html',{"hospd":hosp_detail}) 
+    return render(request,'donor/index_donor.html',{"hospd":hosp_detail}) 
 
 
 #Login page
@@ -55,7 +57,7 @@ def d_login(request):
             messages.success(request, 'Username or Password is incorrect!!')
             
 
-    return render (request,'login_donor.html')
+    return render (request,'donor/login_donor.html')
 
 
 
@@ -141,7 +143,7 @@ def d_signup(request):
         messages.success(request, 'Signup successful')
         return redirect('/donor_login')
     users = User.objects.all()
-    return render (request,'signup_donor.html',{"users":users})
+    return render (request,'donor/signup_donor.html',{"users":users})
 
 
 
@@ -165,7 +167,7 @@ def appoint(request):
     user1 = donor_details.objects.get(id_no = id)
     hosp1 = hospital_details.objects.get(id_no = h_uname)
 
-    return render(request,"d_appoint_form.html",{"i":user1,"hosp":hosp1})
+    return render(request,"donor/d_appoint_form.html",{"i":user1,"hosp":hosp1})
 
 
 
@@ -174,7 +176,7 @@ def appoint(request):
 def d_appoint(request):
     d_uname = request.session['uname']
     appoint = appointment_scheduled.objects.filter(donor_id=d_uname)
-    return render(request,"d_scheduled_appoint.html",{"app":appoint})
+    return render(request,"donor/d_scheduled_appoint.html",{"app":appoint})
 
 
 # @user_passes_test(in_my_group,login_url='/donor_login')
@@ -205,7 +207,7 @@ def d_show_req(request):
     else:
         req2 = ""
     req1 = blood_request.objects.filter(recieved=False)
-    return render(request,"d_show_req.html",{"r":req1,"r2":req2})
+    return render(request,"donor/d_show_req.html",{"r":req1,"r2":req2})
 
 
 #Update details
@@ -282,7 +284,7 @@ def d_update(request):
         g = True
     else:
         g=False
-    return render(request,"d_update.html",{"j":d_user, "g":g})
+    return render(request,"donor/d_update.html",{"j":d_user, "g":g})
 
 
 # Hospital Profile

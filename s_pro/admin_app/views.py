@@ -14,6 +14,10 @@ from hospital_app.models import *
 
 @login_required(login_url='/admin_user_login')
 def a_index(request):
+    if 'uname' in request.session:
+        a = request.session['uname']
+        if a[0] != "a":
+            return redirect("/admin_user_login")
     donors = donor_details.objects.all()
     patients = patient_details.objects.all()
     hospitals = hospital_details.objects.all()
@@ -22,7 +26,7 @@ def a_index(request):
         "hospitals":hospitals,
         "patients":patients
     }
-    return render(request,'index_admin.html',context)
+    return render(request,'admin/index_admin.html',context)
 
 
 #donor delete
@@ -46,7 +50,7 @@ def a_d_page(request):
         user = donor_details.objects.get(id_no=id_no)
         app = appointment_scheduled.objects.filter(donor_id=id_no)
         req = blood_request.objects.filter(donor_id=id_no)
-        return render(request,'a_d_page.html',{"d":user, "app":app , "r2":req})
+        return render(request,'admin/a_d_page.html',{"d":user, "app":app , "r2":req})
     return redirect("/admin_user")
 
 
@@ -59,7 +63,7 @@ def a_h_page(request):
         user = hospital_details.objects.get(id_no=id_no)
         app = appointment_scheduled.objects.filter(hospital_id=id_no)
         
-        return render(request,'a_h_page.html',{"h":user, "app":app})
+        return render(request,'admin/a_h_page.html',{"h":user, "app":app})
     return redirect("/admin_user")
 
 
@@ -84,7 +88,7 @@ def a_p_page(request):
         request.session["p_id"] = id_no
         user = patient_details.objects.get(id_no=id_no)
         req = blood_request.objects.filter(patient_id=id_no)
-        return render(request,'a_p_page.html',{"p":user, "req":req})
+        return render(request,'admin/a_p_page.html',{"p":user, "req":req})
     return redirect("/admin_user")
 
 
@@ -104,7 +108,7 @@ def a_p_del(request):
 @login_required(login_url='/admin_user_login')
 def a_show_req(request):
     req = blood_request.objects.filter(recieved=False)
-    return render(request,'a_show_req.html',{"r":req})
+    return render(request,'admin/a_show_req.html',{"r":req})
 
 
 
@@ -127,7 +131,7 @@ def a_login(request):
         else:
             messages.success(request, 'Username or Password is incorrect!!')
 
-    return render (request,'login_admin.html')
+    return render (request,'admin/login_admin.html')
 
 def a_logout(request):
     del request.session['uname']
