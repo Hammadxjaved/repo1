@@ -1,4 +1,0 @@
-git commit -a -m "updatename"
-git push origin
-
-git pull origin
