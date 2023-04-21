@@ -4,9 +4,7 @@
 {% endblock %}
 {% block head %}
   <style>
-    * {
-      box-sizing: border-box;
-    }
+   
     
     body {
       background-color: #e7e7e3;
@@ -40,6 +38,7 @@
     }
     @media screen and (max-width: 600px) {
       body {
+        overflow: auto;
         margin: 0;
       }
       div.form-control {
@@ -47,6 +46,7 @@
           padding: 0;
       }
       #regForm {
+        margin: 0 auto;
           padding: 15px;
           width: 95%;
       }
