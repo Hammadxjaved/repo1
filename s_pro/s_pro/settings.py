@@ -153,3 +153,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'projectid936@gmail.com'
 EMAIL_HOST_PASSWORD = 'trgfjaiznheutgpv'
 EMAIL_USE_TLS = True
+
+#ds
